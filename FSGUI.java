@@ -12,6 +12,7 @@ import java.awt.Panel;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.swing.JLayeredPane;
 import javax.swing.SwingConstants;
 
 import java.awt.Toolkit;
@@ -21,27 +22,29 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
 import java.awt.Color;
+import javax.swing.JProgressBar;
 
 
 public class FSGUI {
 
 	private JFrame frame;
+	private FSController myControl;
 
 	/**
 	 * Launch the application.
 	 */
-// 	public static void main(String[] args) {
-// 		EventQueue.invokeLater(new Runnable() {
-// 			public void run() {
-// 				try {
-// 					FSGUI window = new FSGUI();
-// 					window.frame.setVisible(true);
-// 				} catch (Exception e) {
-// 					e.printStackTrace();
-// 				}
-// 			}
-// 		});
-// 	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					FSGUI window = new FSGUI();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
@@ -58,31 +61,60 @@ public class FSGUI {
 		frame = new JFrame();
 		frame.setAlwaysOnTop(true);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setBounds(0, 0, 1950, 1050);
+		frame.setBounds(0, 0, 800, 500);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new MigLayout("", "[grow,leading][grow,trailing]", "[grow,top][grow][grow,bottom]"));
-		frame.setResizable(false);
+		frame.getContentPane().setLayout(new MigLayout("", "[grow][grow]", "[grow][grow][grow]"));
 		
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Fight Screen", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		frame.getContentPane().add(panel, "cell 0 0 2 1,grow");
-		panel.setLayout(new MigLayout("", "[100px:n,grow,leading][100px:n,grow,trailing]", "[100px:n,grow,top]"));
+		JLayeredPane pane = new JLayeredPane();
+		pane.setBorder(null);
+		frame.getContentPane().add(pane, "cell 0 0 2 1, grow");
+		pane.setLayout(new MigLayout("", "[grow][grow][grow]", "[15.00,grow][15.00,grow][grow][grow][15.00,grow][grow][grow]"));
 		
-		JLabel lblNewLabel = new JLabel("");
-		panel.add(lblNewLabel, "cell 0 0 2 1,grow");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		lblNewLabel.setMinimumSize(new Dimension(200,100));
+		
+		JProgressBar OCatRP = new JProgressBar();
+		pane.setLayer(OCatRP, 1);
+		pane.add(OCatRP, "cell 0 1,alignx center,aligny top");
+		
+		
+		JLabel OtherCat = new JLabel("Other Cat");
+		OtherCat.setHorizontalAlignment(SwingConstants.CENTER);
+		pane.setLayer(OtherCat, 2);
+		pane.add(OtherCat, "cell 0 2 1 2,alignx center,aligny center");
+		
+		
+		
+		JLabel Background = new JLabel("");
+		pane.setLayer(Background, 0);
+		pane.add(Background, "cell 0 0 3 7,grow");
+		Background.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		Background.setMinimumSize(new Dimension(200,100));
 		ImageIcon imgIc = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\grass.jpg");
-		lblNewLabel.setIcon(imgIc);
+		Background.setIcon(imgIc);
 		
 		Image img = imgIc.getImage();
-		Image newImg = img.getScaledInstance(1600, 750, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+		Image newImg = img.getScaledInstance(1900, 900, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
 		imgIc = new ImageIcon (newImg);
 		
-		lblNewLabel.setIcon(imgIc);
+		Background.setIcon(imgIc);
+		
+		
+		
+		JProgressBar MCatRP = new JProgressBar();
+		pane.setLayer(MCatRP, 1);
+		pane.add(MCatRP, "cell 2 4,alignx center,aligny bottom");
+		
+		
+		JLabel MyCat = new JLabel("My Cat");
+		MyCat.setHorizontalAlignment(SwingConstants.CENTER);
+		pane.setLayer(MyCat, 2);
+		pane.add(MyCat, "cell 2 5 1 2,alignx center,aligny center");
+		
+		
+		
 		
 		JButton btnMove = new JButton("Move 1");
 		frame.getContentPane().add(btnMove, "cell 0 1,grow");
