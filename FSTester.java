@@ -5,7 +5,8 @@ public class FSTester {
 
 	public static void main (String[] args)
 	{
-		FSController fight = new FSController();
+		Cat myCat = new Cat ("Black", 30, 12, 14, 14);
+		FSController fight = new FSController(myCat);
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
