@@ -29,6 +29,10 @@ public class FSGUI {
 
 	private JFrame frame;
 	private FSController myControl;
+	private JProgressBar OCatRP;
+	private JProgressBar MCatRP;
+	private JLabel oRP;
+	private JLabel mRP;
 
 	/**
 	 * Launch the application.
@@ -74,15 +78,22 @@ public class FSGUI {
 		
 		
 		
-		JProgressBar OCatRP = new JProgressBar();
+		OCatRP = new JProgressBar();
+		OCatRP.setForeground(Color.GREEN);
 		pane.setLayer(OCatRP, 1);
-		pane.add(OCatRP, "cell 0 1,alignx center,aligny top");
+		pane.add(OCatRP, "cell 0 1,alignx center,aligny center");
 		
 		
 		JLabel OtherCat = new JLabel("Other Cat");
 		OtherCat.setHorizontalAlignment(SwingConstants.CENTER);
 		pane.setLayer(OtherCat, 2);
-		pane.add(OtherCat, "cell 0 2 1 2,alignx center,aligny center");
+		pane.add(OtherCat, "flowx,cell 0 2 1 2,alignx center,aligny center");
+		
+		oRP = new JLabel("");
+		pane.add(oRP, "cell 0 1,alignx trailing,aligny center");
+		
+		mRP = new JLabel("");
+		pane.add(mRP, "cell 2 4,alignx trailing,aligny center");
 		
 		
 		
@@ -103,9 +114,10 @@ public class FSGUI {
 		
 		
 		
-		JProgressBar MCatRP = new JProgressBar();
+		MCatRP = new JProgressBar();
+		MCatRP.setForeground(Color.GREEN);
 		pane.setLayer(MCatRP, 1);
-		pane.add(MCatRP, "cell 2 4,alignx center,aligny bottom");
+		pane.add(MCatRP, "cell 2 4,alignx center,aligny center");
 		
 		
 		JLabel MyCat = new JLabel("My Cat");
@@ -127,6 +139,20 @@ public class FSGUI {
 		
 		JButton btnMove_3 = new JButton("Move 4");
 		frame.getContentPane().add(btnMove_3, "cell 1 2,grow");
+	}
+	
+	public void setRP(Cat my, Cat other)
+	{
+		int myRP = my.getRP();
+		int otRP = other.getRP();
+		
+		MCatRP.setMaximum(myRP);
+		mRP.setText(myRP + " / " + myRP);
+		MCatRP.setValue(myRP);
+		
+		OCatRP.setMaximum(otRP);
+		oRP.setText(otRP + " / " + otRP);
+		OCatRP.setValue(otRP);
 	}
 
 }
