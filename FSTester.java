@@ -5,14 +5,13 @@ public class FSTester {
 
 	public static void main (String[] args)
 	{
-		Cat myCat = new Cat ("Black", 30, 12, 14, 14);
+		Cat myCat = new Cat ("Black", 20, 20, 20, 20);
 		FSController fight = new FSController(myCat);
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
 						FSGUI window = new FSGUI(fight);
 						fight.setGui(window);
-						//window.frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
