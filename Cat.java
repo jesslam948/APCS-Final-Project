@@ -1,4 +1,3 @@
-
 public class Cat {
 	private String breed;
 	private int cuteness;
@@ -34,10 +33,10 @@ public class Cat {
 	public void getsHurt(int damage){
 		RP -= damage;
 	}
-//	public void usesPotion(Potion potion){
-//		int p = potion.getRP();
-//		RP += p;
-//	}
+	public void usesPotion(Potion potion){
+		int p = potion.getRP();
+		RP += p;
+	}
 	public boolean wins(Cat otherCat){
 		return (otherCat.getRP() <=0);
 	}
