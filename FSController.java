@@ -5,6 +5,7 @@ public class FSController {
 	private Cat otherCat;
 	private int myRP;
 	private int otherRP;
+	private boolean isEnded;
 	
 	public FSController(Cat cat)
 	{
@@ -13,6 +14,8 @@ public class FSController {
 		
 		otherCat = setOtherCat();
 		otherRP = otherCat.getRP();
+		
+		isEnded = false;
 	}
 
 	public void setGui (FSGUI gui)
@@ -38,24 +41,84 @@ public class FSController {
 		myGui.setRP(myCat, otherCat);
 	}
 	
-	public void myAttack(String move)
+	public int getMRP()
 	{
-		
+		return myRP;
 	}
 	
-	public void otherAttack()
+	public int getORP()
 	{
-		int ran = (int)(Math.random() * 4) + 1;
+		return otherRP;
+	}
+	
+	public boolean isDone()
+	{
+		return isEnded;
+	}
+	
+	public void compAttack()
+	{
+		int randNum = (int)(Math.random() * 4) + 1;
 		
-		switch (ran)
+		decRP("other", randNum);
+	}
+	
+	public void decRP(String attacker, int move)
+	{
+		int pts = 0;
+		Cat theCat = null;
+		
+		if (attacker.equals("my"))
+			theCat = myCat;
+		else
+			theCat = otherCat;
+		
+		switch (move)
 		{
-			case 1:
-				
+		case 1:
+			pts = (int)((theCat.getCuteness()/2) * Math.random()) + 1;
+			break;
+		case 2:
+			pts = (int)((theCat.getIntelligence()/2) * Math.random()) + 1;
+			break;
+		case 3:
+			pts = (int)((theCat.getFriendliness()/2) * Math.random()) + 1;
+			break;
+		case 4:
+			pts = (int)((theCat.getCuteness()/2) * Math.random()) + 1;
+			break;
 		}
-	}
-	
-	public void play()
-	{
 		
+		///CAN CHANGE PTS VALUE AT A LATER TIME!
+
+		if (theCat.equals(myCat))
+		{
+			if (pts >= otherRP)
+				otherRP = 0;
+			else
+				otherRP -= pts;
+			myGui.decRP("other", otherRP, myCat.getRP());
+			myGui.moveDone("other", move , pts);
+		}
+		else
+		{
+			if (pts >= myRP)
+				myRP = 0;
+			else
+				myRP -= pts;
+			myGui.decRP("my", myRP, otherCat.getRP());
+			myGui.moveDone("my", move , pts);
+		}
+		
+		if (myRP == 0)
+		{
+			isEnded = true;
+			myGui.isEnd("lost");
+		}
+		else if (otherRP == 0)
+		{
+			isEnded = true;
+			myGui.isEnd("won");
+		}
 	}
 }
