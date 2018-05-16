@@ -1,10 +1,11 @@
 
 public class Cat {
-	String breed;
-	int cuteness;
-	int intelligence;
-	int friendliness;
-	int RP;
+	private String breed;
+	private int cuteness;
+	private int intelligence;
+	private int friendliness;
+	private int RP;
+	
 	public Cat(String bre, int cute, int smart, int friendly, int R){
 		breed = bre;
 		cuteness = cute;
