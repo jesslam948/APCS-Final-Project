@@ -13,6 +13,7 @@ import java.awt.Panel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import java.awt.Toolkit;
@@ -22,6 +23,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
 import java.awt.Color;
+
 import javax.swing.JProgressBar;
 
 
@@ -33,22 +35,12 @@ public class FSGUI {
 	private JProgressBar MCatRP;
 	private JLabel oRP;
 	private JLabel mRP;
-
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					FSGUI window = new FSGUI();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	private JButton Move1;
+	private JButton Move2;
+	private JButton Move3;
+	private JButton Move4;
+	private boolean playerDone;
+	
 
 	/**
 	 * Create the application.
@@ -56,6 +48,11 @@ public class FSGUI {
 	public FSGUI(FSController control) {
 		myControl = control;
 		initialize();
+	}
+	
+	public FSController getControl()
+	{
+		return myControl;
 	}
 
 	/**
@@ -66,14 +63,15 @@ public class FSGUI {
 		frame.setAlwaysOnTop(true);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setBounds(0, 0, 800, 500);
-		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow][grow]", "[grow][grow][grow]"));
+		frame.setVisible(true);
 		
+		playerDone = false;
 		
 		JLayeredPane pane = new JLayeredPane();
 		pane.setBorder(null);
-		frame.getContentPane().add(pane, "cell 0 0 2 1, grow");
+		frame.getContentPane().add(pane, "cell 0 0 2 1,grow");
 		pane.setLayout(new MigLayout("", "[grow][grow][grow]", "[15.00,grow][15.00,grow][grow][grow][15.00,grow][grow][grow]"));
 		
 		
@@ -87,7 +85,7 @@ public class FSGUI {
 		JLabel OtherCat = new JLabel("Other Cat");
 		OtherCat.setHorizontalAlignment(SwingConstants.CENTER);
 		pane.setLayer(OtherCat, 2);
-		pane.add(OtherCat, "flowx,cell 0 2 1 2,alignx center,aligny center");
+		pane.add(OtherCat, "cell 0 2 1 2,alignx center,aligny center");
 		
 		oRP = new JLabel("");
 		pane.add(oRP, "cell 0 1,alignx trailing,aligny center");
@@ -127,18 +125,52 @@ public class FSGUI {
 		
 		
 		
+		Moves l = new Moves(this);
 		
-		JButton btnMove = new JButton("Move 1");
-		frame.getContentPane().add(btnMove, "cell 0 1,grow");
+		Move1 = new JButton("Move 1");
+		frame.getContentPane().add(Move1, "cell 0 1,grow");
+		Move1.addActionListener(l);
 		
-		JButton btnMove_1 = new JButton("Move 2");
-		frame.getContentPane().add(btnMove_1, "cell 1 1,grow");
+		Move2 = new JButton("Move 2");
+		frame.getContentPane().add(Move2, "cell 1 1,grow");
+		Move2.addActionListener(l);
 		
-		JButton btnMove_2 = new JButton("Move 3");
-		frame.getContentPane().add(btnMove_2, "cell 0 2,grow");
+		Move3 = new JButton("Move 3");
+		frame.getContentPane().add(Move3, "cell 0 2,grow");
+		Move3.addActionListener(l);
 		
-		JButton btnMove_3 = new JButton("Move 4");
-		frame.getContentPane().add(btnMove_3, "cell 1 2,grow");
+		Move4 = new JButton("Move 4");
+		frame.getContentPane().add(Move4, "cell 1 2,grow");
+		Move4.addActionListener(l);
+	}
+	
+	public void moveDone(String defender, int move, int pts)
+	{
+		String moveName = "";
+		String cat = "";
+		
+		switch (move)
+		{
+		case 1:
+			moveName = Move1.getText() + "! - " + pts + "pts!";
+			break;
+		case 2:
+			moveName = Move2.getText() + "! - " + pts + "pts!";
+			break;
+		case 3:
+			moveName = Move3.getText() + "! - " + pts + "pts!";
+			break;
+		case 4:
+			moveName = Move4.getText() + "! - " + pts + "pts!";
+			break;
+		}
+		
+		if (defender.equals("my"))
+			cat = "The other cat used ";
+		else
+			cat = "You used ";
+		
+		JOptionPane.showMessageDialog(frame, cat + moveName);
 	}
 	
 	public void setRP(Cat my, Cat other)
@@ -154,5 +186,39 @@ public class FSGUI {
 		oRP.setText(otRP + " / " + otRP);
 		OCatRP.setValue(otRP);
 	}
+	
+	public void decRP(String defender, int newRP, int oldRP)
+	{
+		if (defender.equals("my"))
+		{
+			mRP.setText(newRP + " / " + oldRP);
+			MCatRP.setValue(newRP);
+		}
+		else
+		{
+			oRP.setText(newRP + " / " + oldRP);
+			OCatRP.setValue(newRP);
+		}
+	}
+	
+	public void playerTurn()
+	{
+		Move1.setEnabled(true);
+		Move2.setEnabled(true);
+		Move3.setEnabled(true);
+		Move4.setEnabled(true); 
+	}
 
+	public void computerTurn()
+	{
+		Move1.setEnabled(false);
+		Move2.setEnabled(false);
+		Move3.setEnabled(false);
+		Move4.setEnabled(false);
+	}
+	
+	public void isEnd(String result)
+	{
+		JOptionPane.showMessageDialog(frame, "You " + result + "!");
+	}
 }
