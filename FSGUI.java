@@ -39,7 +39,6 @@ public class FSGUI {
 	private JButton Move2;
 	private JButton Move3;
 	private JButton Move4;
-	private boolean playerDone;
 	
 
 	/**
@@ -67,31 +66,38 @@ public class FSGUI {
 		frame.getContentPane().setLayout(new MigLayout("", "[grow][grow]", "[grow][grow][grow]"));
 		frame.setVisible(true);
 		
-		playerDone = false;
-		
 		JLayeredPane pane = new JLayeredPane();
 		pane.setBorder(null);
 		frame.getContentPane().add(pane, "cell 0 0 2 1,grow");
-		pane.setLayout(new MigLayout("", "[grow][grow][grow]", "[15.00,grow][15.00,grow][grow][grow][15.00,grow][grow][grow]"));
+		pane.setLayout(new MigLayout("", "[grow][grow][800.00,grow]", "[15.00,grow][15.00,grow][50.00,grow][250.00,grow][15.00,grow][grow][grow]"));
 		
 		
 		
 		OCatRP = new JProgressBar();
 		OCatRP.setForeground(Color.GREEN);
 		pane.setLayer(OCatRP, 1);
-		pane.add(OCatRP, "cell 0 1,alignx center,aligny center");
+		pane.add(OCatRP, "cell 2 1,alignx center,aligny center");
 		
 		
-		JLabel OtherCat = new JLabel("Other Cat");
+		JLabel OtherCat = new JLabel("");
 		OtherCat.setHorizontalAlignment(SwingConstants.CENTER);
 		pane.setLayer(OtherCat, 2);
-		pane.add(OtherCat, "cell 0 2 1 2,alignx center,aligny center");
+		pane.add(OtherCat, "cell 2 2 1 2,alignx center,aligny center");
+		
+		OtherCat.setMinimumSize(new Dimension(500,500));
+		ImageIcon imgIc1 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\MottledCat.png");
+		
+		Image img1 = imgIc1.getImage();
+		Image newImg1 = img1.getScaledInstance(500, 500, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+		imgIc1 = new ImageIcon (newImg1);
+		
+		OtherCat.setIcon(imgIc1);
 		
 		oRP = new JLabel("");
-		pane.add(oRP, "cell 0 1,alignx trailing,aligny center");
+		pane.add(oRP, "cell 2 1,alignx trailing,aligny center");
 		
 		mRP = new JLabel("");
-		pane.add(mRP, "cell 2 4,alignx trailing,aligny center");
+		pane.add(mRP, "cell 0 4,alignx trailing,aligny center");
 		
 		
 		
@@ -101,8 +107,7 @@ public class FSGUI {
 		Background.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		Background.setMinimumSize(new Dimension(200,100));
-		ImageIcon imgIc = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\grass.jpg");
-		Background.setIcon(imgIc);
+		ImageIcon imgIc = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\fightscreen.jpg");
 		
 		Image img = imgIc.getImage();
 		Image newImg = img.getScaledInstance(1900, 900, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
@@ -115,13 +120,13 @@ public class FSGUI {
 		MCatRP = new JProgressBar();
 		MCatRP.setForeground(Color.GREEN);
 		pane.setLayer(MCatRP, 1);
-		pane.add(MCatRP, "cell 2 4,alignx center,aligny center");
+		pane.add(MCatRP, "cell 0 4,alignx center,aligny center");
 		
 		
 		JLabel MyCat = new JLabel("My Cat");
 		MyCat.setHorizontalAlignment(SwingConstants.CENTER);
 		pane.setLayer(MyCat, 2);
-		pane.add(MyCat, "cell 2 5 1 2,alignx center,aligny center");
+		pane.add(MyCat, "cell 0 5 1 2,alignx center,aligny center");
 		
 		
 		
