@@ -97,7 +97,7 @@ public class FSController {
 				otherRP = 0;
 			else
 				otherRP -= pts;
-			myGui.decRP("other", otherRP, myCat.getRP());
+			myGui.decRP("other", otherRP, otherCat.getRP());
 			myGui.moveDone("other", move , pts);
 		}
 		else
@@ -106,7 +106,7 @@ public class FSController {
 				myRP = 0;
 			else
 				myRP -= pts;
-			myGui.decRP("my", myRP, otherCat.getRP());
+			myGui.decRP("my", myRP, myCat.getRP());
 			myGui.moveDone("my", move , pts);
 		}
 		
