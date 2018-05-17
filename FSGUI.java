@@ -206,22 +206,6 @@ public class FSGUI {
 		}
 	}
 	
-	public void playerTurn()
-	{
-		Move1.setEnabled(true);
-		Move2.setEnabled(true);
-		Move3.setEnabled(true);
-		Move4.setEnabled(true); 
-	}
-
-	public void computerTurn()
-	{
-		Move1.setEnabled(false);
-		Move2.setEnabled(false);
-		Move3.setEnabled(false);
-		Move4.setEnabled(false);
-	}
-	
 	public void isEnd(String result)
 	{
 		JOptionPane.showMessageDialog(frame, "You " + result + "!");
