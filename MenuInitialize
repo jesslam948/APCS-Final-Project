@@ -1,0 +1,108 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+
+import java.awt.*;          // access to Container
+import java.awt.event.*;    // access to WindowAdapter, WindowEvent
+
+import javax.swing.*;       // access to JFrame and JComponents
+
+import net.miginfocom.swing.MigLayout;
+
+
+
+public class Menu {
+
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Menu window = new Menu();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	
+	
+	public Menu() {
+		initialize();
+		frame.setVisible(true);
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		
+		frame.setBounds(100, 100, 508, 568);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[grow]"));
+/*		JLayeredPane layeredPane = new JLayeredPane();
+		frame.getContentPane().add(layeredPane, "cell 0 0,grow");
+		layeredPane.setLayout(new MigLayout("", "[grow]", "[grow][grow]"));
+		
+		JPanel panel_1 = new JPanel();
+		layeredPane.setLayer(panel_1, 1);
+		layeredPane.add(panel_1, "cell 0 0,grow");
+		
+		JPanel panel = new JPanel();
+		layeredPane.add(panel, "cell 0 1,grow");
+		*/
+		
+		ImageIcon imgIc = new ImageIcon("H:\\New Folder\\cat background big.jpg");
+		
+		Image img = imgIc.getImage();
+		Image newImg = img.getScaledInstance(1550, 1100, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+		imgIc = new ImageIcon (newImg);
+		
+		JLabel backgnd = new JLabel(imgIc);
+		frame.getContentPane().add(backgnd);
+		frame.setSize(800, 800);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//backgnd.setLayout(new GridLayout(1,1));
+		JLabel logoLabel = new JLabel("");
+		logoLabel.setBounds(900, 400, 200, 100);
+		backgnd.add(logoLabel);
+		
+		ClickListener l = new ClickListener(this);
+		
+		JButton fightButton = new JButton("Fight!");
+		fightButton.setBounds(900, 400, 200, 100);
+		backgnd.add(fightButton);
+		fightButton.addActionListener(l);
+		
+		JButton catButton = new JButton("Cats");
+		catButton.setBounds(900, 500, 200, 100);
+		backgnd.add(catButton);
+		catButton.addActionListener(l);
+		
+		JButton itemButton = new JButton("Items");
+		itemButton.setBounds(900, 600, 200, 100);
+		backgnd.add(itemButton);
+		itemButton.addActionListener(l);
+	}
+	public void delete(){
+		frame.dispose();
+	}
+
+	
+
+	
+
+	private static void addPopup(Component component, final JPopupMenu popup) {
+	}
+}
