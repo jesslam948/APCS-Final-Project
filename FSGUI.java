@@ -130,7 +130,7 @@ public class FSGUI {
 		
 		
 		
-		Moves l = new Moves(this);
+		FSActionListener l = new FSActionListener(this);
 		
 		Move1 = new JButton("Move 1");
 		frame.getContentPane().add(Move1, "cell 0 1,grow");
