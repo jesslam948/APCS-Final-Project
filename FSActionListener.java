@@ -2,10 +2,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class Moves implements ActionListener{
+public class FSActionListener implements ActionListener{
 	private final FSGUI fscreen;
 	
-	public Moves(FSGUI gui)
+	public FSActionListener(FSGUI gui)
 	{
 		fscreen = gui;
 	}
