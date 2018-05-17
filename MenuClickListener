@@ -1,0 +1,37 @@
+
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+public class ClickListener implements ActionListener{
+	private final Menu fscreen;
+	
+	public ClickListener(Menu gui)
+	{
+		fscreen = gui;
+	}
+	
+	
+	public void actionPerformed(ActionEvent e)
+	{
+		
+		
+		if (e.getActionCommand().equals("Fight!"))
+		{
+			FightScreen window = new FightScreen();
+			
+		}
+		else if (e.getActionCommand().equals("Cats"))
+		{
+			
+		}
+		else if (e.getActionCommand().equals("Items"))
+		{
+			
+		}
+		fscreen.delete();
+		
+	}
+
+}
