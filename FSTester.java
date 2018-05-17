@@ -13,7 +13,6 @@ public class FSTester {
 					try {
 						FSGUI window = new FSGUI(fight);
 						fight.setGui(window);
-						window.playerTurn();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
