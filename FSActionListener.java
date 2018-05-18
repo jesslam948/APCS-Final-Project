@@ -32,7 +32,8 @@ public class FSActionListener implements ActionListener{
 			control.decRP("my", 4);
 		}
 		
-		control.compAttack();
+		if (!fscreen.hasEnded())
+			control.compAttack();
 	}
 
 }
