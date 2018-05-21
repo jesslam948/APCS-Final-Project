@@ -39,6 +39,7 @@ public class FSGUI {
 	private JButton Move2;
 	private JButton Move3;
 	private JButton Move4;
+	private boolean isDone;
 	
 
 	/**
@@ -63,74 +64,78 @@ public class FSGUI {
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setBounds(0, 0, 800, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new MigLayout("", "[grow][grow]", "[grow][grow][grow]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[grow][grow]", "[900px:n:900px][50px:n,grow][50px:n,grow]"));
 		frame.setVisible(true);
 		
-		JLayeredPane pane = new JLayeredPane();
-		pane.setBorder(null);
-		frame.getContentPane().add(pane, "cell 0 0 2 1,grow");
-		pane.setLayout(new MigLayout("", "[grow][grow][800.00,grow]", "[15.00,grow][15.00,grow][50.00,grow][250.00,grow][15.00,grow][grow][grow]"));
 		
+		isDone = false;
+		
+		ImageIcon imgIc = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\fightscreen.jpg");
+		
+		Image img = imgIc.getImage();
+		Image newImg = img.getScaledInstance(1900, 900, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+		
+		BackgroundPanel pane = new BackgroundPanel(newImg);
+		pane.setLocation(0, -450);
+		pane.setSize(1900, 900);
+		pane.setTransparentAdd(true);
+		frame.getContentPane().add(pane, "cell 0 0 2 1,alignx center,aligny top");
+		pane.setLayout(null);
 		
 		
 		OCatRP = new JProgressBar();
+		OCatRP.setBounds(79, 148, 146, 14);
 		OCatRP.setForeground(Color.GREEN);
-		pane.setLayer(OCatRP, 1);
-		pane.add(OCatRP, "cell 2 1,alignx center,aligny center");
+		pane.add(OCatRP);
 		
 		
 		JLabel OtherCat = new JLabel("");
+		OtherCat.setBounds(230, 5, 300, 300);
+		OtherCat.setVerticalAlignment(SwingConstants.BOTTOM);
 		OtherCat.setHorizontalAlignment(SwingConstants.CENTER);
-		pane.setLayer(OtherCat, 2);
-		pane.add(OtherCat, "cell 2 2 1 2,alignx center,aligny center");
+		pane.add(OtherCat);
 		
-		OtherCat.setMinimumSize(new Dimension(500,500));
-		ImageIcon imgIc1 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\MottledCat.png");
+		OtherCat.setMinimumSize(new Dimension(300, 300));
+		ImageIcon imgIc1 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\BlackCat.png");
 		
 		Image img1 = imgIc1.getImage();
-		Image newImg1 = img1.getScaledInstance(500, 500, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+		Image newImg1 = img1.getScaledInstance(300, 300, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
 		imgIc1 = new ImageIcon (newImg1);
 		
 		OtherCat.setIcon(imgIc1);
 		
 		oRP = new JLabel("");
-		pane.add(oRP, "cell 2 1,alignx trailing,aligny center");
+		oRP.setBounds(535, 155, 0, 0);
+		pane.add(oRP);
 		
 		mRP = new JLabel("");
-		pane.add(mRP, "cell 0 4,alignx trailing,aligny center");
-		
-		
-		
-		JLabel Background = new JLabel("");
-		pane.setLayer(Background, 0);
-		pane.add(Background, "cell 0 0 3 7,grow");
-		Background.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		Background.setMinimumSize(new Dimension(200,100));
-		ImageIcon imgIc = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\fightscreen.jpg");
-		
-		Image img = imgIc.getImage();
-		Image newImg = img.getScaledInstance(1900, 900, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
-		imgIc = new ImageIcon (newImg);
-		
-		Background.setIcon(imgIc);
-		
+		mRP.setBounds(540, 155, 0, 0);
+		pane.add(mRP);
 		
 		
 		MCatRP = new JProgressBar();
+		MCatRP.setBounds(545, 148, 146, 14);
 		MCatRP.setForeground(Color.GREEN);
-		pane.setLayer(MCatRP, 1);
-		pane.add(MCatRP, "cell 0 4,alignx center,aligny center");
+		pane.add(MCatRP);
 		
 		
-		JLabel MyCat = new JLabel("My Cat");
+		JLabel MyCat = new JLabel("");
+		MyCat.setBounds(185, 310, 400, 400);
 		MyCat.setHorizontalAlignment(SwingConstants.CENTER);
-		pane.setLayer(MyCat, 2);
-		pane.add(MyCat, "cell 0 5 1 2,alignx center,aligny center");
+		pane.add(MyCat);
+		
+		MyCat.setMinimumSize(new Dimension(400, 400));
+		ImageIcon imgIc2 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\BackMottledCat.png");
+		
+		Image img2 = imgIc2.getImage();
+		Image newImg2 = img2.getScaledInstance(400, 400, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+		imgIc2 = new ImageIcon (newImg2);
+		
+		MyCat.setIcon(imgIc2);
 		
 		
 		
-		Moves l = new Moves(this);
+		FSActionListener l = new FSActionListener(this);
 		
 		Move1 = new JButton("Move 1");
 		frame.getContentPane().add(Move1, "cell 0 1,grow");
@@ -206,24 +211,15 @@ public class FSGUI {
 		}
 	}
 	
-	public void playerTurn()
-	{
-		Move1.setEnabled(true);
-		Move2.setEnabled(true);
-		Move3.setEnabled(true);
-		Move4.setEnabled(true); 
-	}
-
-	public void computerTurn()
-	{
-		Move1.setEnabled(false);
-		Move2.setEnabled(false);
-		Move3.setEnabled(false);
-		Move4.setEnabled(false);
-	}
-	
 	public void isEnd(String result)
 	{
 		JOptionPane.showMessageDialog(frame, "You " + result + "!");
+		
+		isDone = true;
+	}
+	
+	public boolean hasEnded()
+	{
+		return isDone;
 	}
 }
