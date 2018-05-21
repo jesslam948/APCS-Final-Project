@@ -11,7 +11,7 @@ import net.miginfocom.swing.MigLayout;
 
 
 
-public class Menu {
+public class MenuGUI{
 
 	private JFrame frame;
 
@@ -36,7 +36,7 @@ public class Menu {
 	 */
 	
 	
-	public Menu() {
+	public MenuGUI() {
 		initialize();
 		frame.setVisible(true);
 	}
@@ -51,6 +51,9 @@ public class Menu {
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[grow]"));
+		JLayeredPane pane = new JLayeredPane();
+		pane.setBorder(null);
+		frame.getContentPane().add(pane, "cell 0 0 2 1,grow");
 /*		JLayeredPane layeredPane = new JLayeredPane();
 		frame.getContentPane().add(layeredPane, "cell 0 0,grow");
 		layeredPane.setLayout(new MigLayout("", "[grow]", "[grow][grow]"));
@@ -64,36 +67,34 @@ public class Menu {
 		*/
 		
 		ImageIcon imgIc = new ImageIcon("H:\\New Folder\\cat background big.jpg");
-		
 		Image img = imgIc.getImage();
-		Image newImg = img.getScaledInstance(1550, 1100, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+		Image newImg = img.getScaledInstance(2000, 2000, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
 		imgIc = new ImageIcon (newImg);
 		
-		JLabel backgnd = new JLabel(imgIc);
+		BackgroundPanel backgnd = new BackgroundPanel(newImg);
+		backgnd.setTransparentAdd(true);
 		frame.getContentPane().add(backgnd);
+		backgnd.setLayout(null);
+		
+		/*JLabel backgnd = new JLabel(imgIc);
+		frame.getContentPane().add(backgnd, "");
 		frame.setSize(800, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//backgnd.setLayout(new GridLayout(1,1));
-		JLabel logoLabel = new JLabel("");
-		logoLabel.setBounds(900, 400, 200, 100);
-		backgnd.add(logoLabel);
+		*/
 		
 		ClickListener l = new ClickListener(this);
 		
-		JButton fightButton = new JButton("Fight!");
+		JButton fightButton = new JButton("Cats");
 		fightButton.setBounds(900, 400, 200, 100);
 		backgnd.add(fightButton);
 		fightButton.addActionListener(l);
 		
-		JButton catButton = new JButton("Cats");
+		JButton catButton = new JButton("Store");
 		catButton.setBounds(900, 500, 200, 100);
 		backgnd.add(catButton);
 		catButton.addActionListener(l);
 		
-		JButton itemButton = new JButton("Items");
-		itemButton.setBounds(900, 600, 200, 100);
-		backgnd.add(itemButton);
-		itemButton.addActionListener(l);
+		
 	}
 	public void delete(){
 		frame.dispose();
