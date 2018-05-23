@@ -4,6 +4,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 
@@ -19,6 +20,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 
 import javax.swing.JTextField;
+
 import java.util.*;
 
 public class CSGUI {
@@ -56,46 +58,79 @@ public class CSGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBackground(Color.PINK);
+		frame.setAlwaysOnTop(true);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setBounds(400, 400, 900, 600);
+		frame.setBounds(0, 0, 2000, 900);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new MigLayout("", "[150][150,grow][150]", "[100][][100]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[grow][grow]", "[900px:n:900px][50px:n,grow][50px:n,grow]"));
+		frame.setVisible(true);
 		
+		
+		ImageIcon imgIc = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1848534\\pawsbackground.jpg");
+		
+		Image img = imgIc.getImage();
+		Image newImg = img.getScaledInstance(2000, 900, Image.SCALE_SMOOTH);
+		imgIc = new ImageIcon(newImg);
+		
+		JLabel backgroundPane = new JLabel();
+		backgroundPane.setHorizontalAlignment(SwingConstants.CENTER);
+		backgroundPane.setVerticalAlignment(SwingConstants.TOP);
+		backgroundPane.setIcon(imgIc);
+		backgroundPane.setLayout(null);
+		
+		frame.setContentPane(backgroundPane);
+		
+		JPanel pane = new JPanel();
+		
+		pane.setSize(2000, 1100);
+		pane.setOpaque(false);
+		backgroundPane.add(pane, "cell 0 0 2 1,alignx center,aligny top");
+		pane.setLayout(null);
+		
+
 		JLabel lblChooseYourStarter = new JLabel("Choose your starter cat!!");
-		lblChooseYourStarter.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		frame.getContentPane().add(lblChooseYourStarter, "cell 1 0,alignx center");
+		lblChooseYourStarter.setForeground(Color.MAGENTA);
+		lblChooseYourStarter.setBounds(462, 127, 795, 129);
+		lblChooseYourStarter.setFont(new Font("Tahoma", Font.BOLD, 60));
+		pane.add(lblChooseYourStarter);
+		btnNewButton_1 = new JButton("Tabby Cat");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnNewButton_1.setBounds(123, 345, 200, 50);
+		btnNewButton_1.addActionListener(new CSClickListener());
 		
 		btnNewButton = new JButton("Black Cat");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnNewButton.setBounds(687, 345, 200,50);
 		btnNewButton.addActionListener(new CSClickListener());
-		
-		btnNewButton_1 = new JButton("Mottled Cat");
-		frame.getContentPane().add(btnNewButton_1, "flowx,cell 0 1,alignx center");
-		frame.getContentPane().add(btnNewButton, "cell 1 1,alignx center");
-		btnNewButton_1.addActionListener(new CSClickListener());
-		btnNewButton_2 = new JButton("Tabby Cat");
-		frame.getContentPane().add(btnNewButton_2, "cell 2 1,alignx center");
+		pane.add(btnNewButton);
+		btnNewButton_2 = new JButton("Mottled Cat");
+		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnNewButton_2.setBounds(1300, 345, 200, 50);
+		pane.add(btnNewButton_2);
 		btnNewButton_2.addActionListener(new CSClickListener());
 		ImageIcon imgIc1 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1848534\\tabbycat.png");
-		
+		pane.add(btnNewButton_1);
 		Image img1 = imgIc1.getImage();
-		Image newImg1 = img1.getScaledInstance(300, 300, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+		Image newImg1 = img1.getScaledInstance(400, 600, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
 		imgIc1 = new ImageIcon (newImg1);		JLabel lblNewLabel = new JLabel();
+		lblNewLabel.setBounds(27, 267, 400, 600);
 		lblNewLabel.setIcon(imgIc1); 
-		frame.getContentPane().add(lblNewLabel, "cell 0 2");
+		pane.add(lblNewLabel);
 		ImageIcon icon = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1848534\\blackcat.png");
-		Image img = icon.getImage();
-		Image newImg = img.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
-		icon = new ImageIcon (newImg);
+		Image i = icon.getImage();
+		Image newI = i.getScaledInstance(400, 600, Image.SCALE_SMOOTH);
+		icon = new ImageIcon (newI);
 		JLabel lblNewLabel_1 = new JLabel(icon);
-		frame.getContentPane().add(lblNewLabel_1, "cell 1 2,alignx center");
+		lblNewLabel_1.setBounds(608, 267, 400, 600);
+		pane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setBounds(1226, 267, 400, 600);
 		ImageIcon icon2 = new ImageIcon("H:\\MottledCat.png");
-		Image newImg2 = icon2.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+		Image newImg2 = icon2.getImage().getScaledInstance(400, 600, Image.SCALE_SMOOTH);
 		icon2.setImage(newImg2);
 		lblNewLabel_2.setIcon(icon2);
-		frame.getContentPane().add(lblNewLabel_2, "cell 2 2");
+		pane.add(lblNewLabel_2);
 
 	}
 	private class CSClickListener implements ActionListener{
@@ -136,3 +171,4 @@ public class CSGUI {
 		
 	}
 }
+
