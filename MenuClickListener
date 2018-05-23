@@ -4,10 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class ClickListener implements ActionListener{
-	private final Menu fscreen;
+public class MClickListener implements ActionListener{
+	private final MenuGUI fscreen;
 	
-	public ClickListener(Menu gui)
+	public MClickListener(MenuGUI gui)
 	{
 		fscreen = gui;
 	}
@@ -17,16 +17,11 @@ public class ClickListener implements ActionListener{
 	{
 		
 		
-		if (e.getActionCommand().equals("Fight!"))
+		if (e.getActionCommand().equals("Cats"))
 		{
-			FightScreen window = new FightScreen();
-			
+			fscreen.cats();
 		}
-		else if (e.getActionCommand().equals("Cats"))
-		{
-			
-		}
-		else if (e.getActionCommand().equals("Items"))
+		else if (e.getActionCommand().equals("Store"))
 		{
 			
 		}
