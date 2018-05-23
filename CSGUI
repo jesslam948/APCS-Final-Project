@@ -1,0 +1,138 @@
+import java.awt.EventQueue;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+
+import java.awt.BorderLayout;
+
+import net.miginfocom.swing.MigLayout;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import java.awt.Font;
+
+import javax.swing.JTextField;
+import java.util.*;
+
+public class CSGUI {
+
+	private JFrame frame;
+	JButton btnNewButton_1;
+	JButton btnNewButton;
+	JButton btnNewButton_2;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CSGUI window = new CSGUI();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public CSGUI() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBackground(Color.PINK);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setBounds(400, 400, 900, 600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new MigLayout("", "[150][150,grow][150]", "[100][][100]"));
+		
+		JLabel lblChooseYourStarter = new JLabel("Choose your starter cat!!");
+		lblChooseYourStarter.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		frame.getContentPane().add(lblChooseYourStarter, "cell 1 0,alignx center");
+		
+		btnNewButton = new JButton("Black Cat");
+		btnNewButton.addActionListener(new CSClickListener());
+		
+		btnNewButton_1 = new JButton("Mottled Cat");
+		frame.getContentPane().add(btnNewButton_1, "flowx,cell 0 1,alignx center");
+		frame.getContentPane().add(btnNewButton, "cell 1 1,alignx center");
+		btnNewButton_1.addActionListener(new CSClickListener());
+		btnNewButton_2 = new JButton("Tabby Cat");
+		frame.getContentPane().add(btnNewButton_2, "cell 2 1,alignx center");
+		btnNewButton_2.addActionListener(new CSClickListener());
+		ImageIcon imgIc1 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1848534\\tabbycat.png");
+		
+		Image img1 = imgIc1.getImage();
+		Image newImg1 = img1.getScaledInstance(300, 300, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+		imgIc1 = new ImageIcon (newImg1);		JLabel lblNewLabel = new JLabel();
+		lblNewLabel.setIcon(imgIc1); 
+		frame.getContentPane().add(lblNewLabel, "cell 0 2");
+		ImageIcon icon = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1848534\\blackcat.png");
+		Image img = icon.getImage();
+		Image newImg = img.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+		icon = new ImageIcon (newImg);
+		JLabel lblNewLabel_1 = new JLabel(icon);
+		frame.getContentPane().add(lblNewLabel_1, "cell 1 2,alignx center");
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		ImageIcon icon2 = new ImageIcon("H:\\MottledCat.png");
+		Image newImg2 = icon2.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+		icon2.setImage(newImg2);
+		lblNewLabel_2.setIcon(icon2);
+		frame.getContentPane().add(lblNewLabel_2, "cell 2 2");
+
+	}
+	private class CSClickListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			if (event.getSource() == btnNewButton_1){
+				Cat cat1 = new Cat("mottled", 5, 5, 5, 5);
+				CatSelections cs = new CatSelections();
+				ArrayList<Cat> list = new ArrayList<Cat>();
+				list.add(cat1);
+				cs.setCats(list);
+				System.out.println("Button 1 clicked");
+				MenuGUI menu = new MenuGUI();
+				
+			}
+			if (event.getSource() == btnNewButton){
+				Cat cat1 = new Cat("black", 5, 5, 5, 5);
+				CatSelections cs = new CatSelections();
+				ArrayList<Cat> list = new ArrayList<Cat>();
+				list.add(cat1);
+				cs.setCats(list);
+				System.out.println("Button clicked");
+				MenuGUI menu = new MenuGUI();
+
+			}
+			if (event.getSource() == btnNewButton_2){
+				Cat cat1 = new Cat("tabby", 5, 5, 5, 5);
+				CatSelections cs = new CatSelections();
+				ArrayList<Cat> list = new ArrayList<Cat>();
+				list.add(cat1);
+				cs.setCats(list);
+				System.out.println("Button 2 clicked");
+				MenuGUI menu = new MenuGUI();
+
+			}
+		}
+		
+	}
+}
