@@ -1,0 +1,219 @@
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.PaintEvent;
+
+import javax.swing.JLabel;
+
+import net.miginfocom.swing.MigLayout;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+
+import javax.swing.SwingConstants;
+
+
+public class CLGUI {
+
+	private JFrame frame;
+	private Cat focusCat;
+	private CatList catList;
+
+	/**
+	 * Launch the application.
+	 */
+	/*public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					
+					CatList window = new CatList();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+*/
+	/**
+	 * Create the application.
+	 */
+	public CLGUI(CatList cats) {
+		catList = cats;
+		catList.addCat(new Cat(1,0,0,0,0));
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		
+		frame.setBounds(100, 100, 508, 568);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[grow]"));
+
+		
+		ImageIcon imgIc = new ImageIcon("H:\\New Folder\\blue.jpg");
+		Image img = imgIc.getImage();
+		Image newImg = img.getScaledInstance(2000, 2000, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+		imgIc = new ImageIcon (newImg);
+		
+		JLabel backgnd = new JLabel(imgIc);
+		backgnd.setBounds(0, 0, 3000, 5000);
+		//frame.getContentPane().add(backgnd, "grow");
+		frame.setSize(800, 800);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		backgnd.setLayout( new BorderLayout() );
+		frame.setContentPane( backgnd );
+		
+		JLabel mLabel = new JLabel("");
+		ImageIcon mcat = new ImageIcon("H:\\New Folder\\mottledcat.png");
+		Image mcat1 = mcat.getImage();
+		Image mcat2 = mcat1.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+		mcat = new ImageIcon (mcat2);
+		mLabel.setIcon(mcat);
+		
+		JLabel wLabel = new JLabel("");
+		ImageIcon wcat = new ImageIcon("H:\\New Folder\\whitecat.png");
+		Image wcat1 = wcat.getImage();
+		Image wcat2 = wcat1.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+		wcat = new ImageIcon (wcat2);
+		wLabel.setIcon(wcat);
+		
+		JLabel tLabel = new JLabel("");
+		ImageIcon tcat = new ImageIcon("H:\\New Folder\\tabbycat.png");
+		Image tcat1 = tcat.getImage();
+		Image tcat2 = tcat1.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+		tcat = new ImageIcon (tcat2);
+		tLabel.setIcon(tcat);
+		
+		//backgnd.add(logoLabel);
+		
+		
+		JLabel bLabel = new JLabel("");
+		ImageIcon bcat = new ImageIcon("H:\\New Folder\\blackcat.png");
+		Image bcat1 = bcat.getImage();
+		Image bcat2 = bcat1.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+		bcat = new ImageIcon (bcat2);
+		bLabel.setIcon(bcat);
+		
+		JLabel blankLabel = new JLabel("");
+		ImageIcon blank;
+		Image blank1;
+		Image blank2;
+		blank = new ImageIcon("H:\\New Folder\\questionmark.png");
+		blank1 = blank.getImage();
+		blank2 = blank1.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+		blank = new ImageIcon (blank2);
+		blankLabel.setIcon(blank);
+		
+		JLabel blankLabel2 = new JLabel("");
+		blankLabel2.setIcon(blank);
+		JLabel blankLabel3 = new JLabel("");
+		blankLabel3.setIcon(blank);
+		JLabel blankLabel4 = new JLabel("");
+		blankLabel4.setIcon(blank);
+		
+		CLClickListener click = new CLClickListener(this);
+		
+		JButton fightButton = new JButton("Fight!");
+		fightButton.addActionListener(click);
+		JButton statsButton = new JButton("Stats");
+		statsButton.addActionListener(click);
+		JButton wButton = new JButton("White");
+		wButton.addActionListener(click);
+		JButton tButton = new JButton("Tabby");
+		tButton.addActionListener(click);
+		JButton mButton = new JButton("Mottled");
+		mButton.addActionListener(click);
+		JButton bButton = new JButton("Black");
+		bButton.addActionListener(click);
+		
+		BackgroundPanel b = new BackgroundPanel(newImg);
+		b.setTransparentAdd(true);
+		frame.getContentPane().add(b);
+		b.setLayout(null);
+		//b.setLayout(new GridLayout(3, 3, 2, 2));
+		
+		if(catList.getCat(1).getBreed() == 0){
+			blankLabel.setBounds(1100, 525, 250, 250);
+			b.add(blankLabel);
+		}
+		else{
+			bLabel.setBounds(1000, 400, 500, 500);
+			b.add(bLabel);
+		}
+		if(catList.getCat(2).getBreed() == 0){
+			blankLabel2.setBounds(300, 175, 250, 250);
+			b.add(blankLabel2);
+		}
+		else{
+			mLabel.setBounds(200, 100, 500, 500);
+			b.add(mLabel);
+		}
+		if(catList.getCat(3).getBreed() == 0){
+			blankLabel3.setBounds(300, 525, 250, 250);
+			b.add(blankLabel3);
+		}
+		else{
+			tLabel.setBounds(200, 400, 500, 500);
+			b.add(tLabel);
+		}
+		if(catList.getCat(4).getBreed() == 0){
+			blankLabel4.setBounds(1100, 175, 250, 250);
+			b.add(blankLabel4);
+		}
+		else{
+			wLabel.setBounds(1000, 50, 500, 500);
+			b.add(wLabel);
+		}
+		
+		fightButton.setBounds(900, 900, 100, 50);
+		b.add(fightButton);
+		statsButton.setBounds(1000, 900, 100, 50);
+		b.add(statsButton);
+		
+		mButton.setBounds(375, 450, 100, 50);
+		b.add(mButton);
+		wButton.setBounds(1175, 450, 100, 50);
+		b.add(wButton);
+		tButton.setBounds(375, 800, 100, 50);
+		b.add(tButton);
+		bButton.setBounds(1175, 800, 100, 50);
+		b.add(bButton);
+		frame.setVisible(true);
+		
+	}
+	public void setCat(int i){
+		focusCat = catList.getCat(i);
+	}
+	public void fight(){
+		if(focusCat.getBreed() != 0){
+			FSController c = new FSController(focusCat);
+			FSGUI gui = new FSGUI(c);
+		}
+	}
+	public void stats(){
+		if(focusCat.getBreed() != 0){
+			
+		}
+	}
+	public void delete(){
+		frame.dispose();
+	}
+}
