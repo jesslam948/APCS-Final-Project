@@ -1,0 +1,98 @@
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import org.jdesktop.swingx.*;
+import java.awt.BorderLayout;
+
+import javax.swing.SwingConstants;
+
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.Image;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
+public class StatsGUI {
+
+	private JFrame frame;
+	private JButton btnFight;
+	private Cat cat;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					StatsGUI window = new StatsGUI(new Cat("tabby", 5, 5, 5, 5));
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public StatsGUI(Cat c) {
+		cat = c;
+		initialize();
+		
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setBounds(100, 100, 800, 500);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JLabel lblStatscatName = new JLabel("Stats(" + cat.getBreed() + ")");
+		lblStatscatName.setForeground(Color.MAGENTA);
+		lblStatscatName.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblStatscatName.setHorizontalAlignment(SwingConstants.CENTER);
+		frame.getContentPane().add(lblStatscatName, BorderLayout.NORTH);
+		
+		JXLabel label = new JXLabel("");
+		label.setLineWrap(true);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		frame.getContentPane().add(label, BorderLayout.CENTER);
+		ImageIcon imgIc1 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1848534\\tabbycat.png");
+		
+		Image img1 = imgIc1.getImage();
+		Image newImg1 = img1.getScaledInstance(400, 600, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+		imgIc1 = new ImageIcon (newImg1);
+		label.setIcon(imgIc1); 
+		JXLabel lblStats = new JXLabel("Stats\nBreed:" + cat.getBreed()+ "\nCuteness:" + cat.getCuteness() + "\nIntelligence:" + cat.getIntelligence() + "\nFriendliness:" + cat.getFriendliness() + "\nMax RP:"+ cat.getRP());
+		lblStats.setLineWrap(true);
+		lblStats.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		frame.getContentPane().add(lblStats, BorderLayout.WEST);
+		
+		btnFight = new JButton("Fight");
+		btnFight.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnFight.addActionListener(new StatsClickListener());
+		btnFight.setForeground(Color.BLACK);
+		btnFight.setBackground(Color.CYAN);
+		frame.getContentPane().add(btnFight, BorderLayout.EAST);
+		
+	}
+	private class StatsClickListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			if (event.getSource() == btnFight){
+				System.out.print("go to fight GUI");
+			}
+		}
+		
+	}
+
+}
