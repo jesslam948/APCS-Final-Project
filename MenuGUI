@@ -14,6 +14,7 @@ import net.miginfocom.swing.MigLayout;
 public class MenuGUI{
 
 	private JFrame frame;
+	private CatList catList;
 
 	/**
 	 * Launch the application.
@@ -22,7 +23,7 @@ public class MenuGUI{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu window = new Menu();
+					MenuGUI window = new MenuGUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,6 +38,7 @@ public class MenuGUI{
 	
 	
 	public MenuGUI() {
+		catList = new CatList();
 		initialize();
 		frame.setVisible(true);
 	}
@@ -82,7 +84,7 @@ public class MenuGUI{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		*/
 		
-		ClickListener l = new ClickListener(this);
+		MClickListener l = new MClickListener(this);
 		
 		JButton fightButton = new JButton("Cats");
 		fightButton.setBounds(900, 400, 200, 100);
@@ -96,6 +98,10 @@ public class MenuGUI{
 		
 		
 	}
+	public void cats(){
+		CLGUI c = new CLGUI(catList);
+	}
+	
 	public void delete(){
 		frame.dispose();
 	}
