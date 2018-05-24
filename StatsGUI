@@ -3,7 +3,10 @@ import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import org.jdesktop.swingx.*;
+
 import java.awt.BorderLayout;
 
 import javax.swing.SwingConstants;
@@ -11,9 +14,12 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Image;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import net.miginfocom.swing.MigLayout;
 
 
 public class StatsGUI {
@@ -28,7 +34,7 @@ public class StatsGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StatsGUI window = new StatsGUI(new Cat("tabby", 5, 5, 5, 5));
+					StatsGUI window = new StatsGUI(new Cat(2, 5, 5, 5, 5));
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,37 +57,66 @@ public class StatsGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setAlwaysOnTop(true);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setBounds(100, 100, 800, 500);
+		frame.setBounds(0, 0, 2000, 900);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new MigLayout("", "[grow][grow]", "[900px:n:900px][50px:n,grow][50px:n,grow]"));
+		frame.setVisible(true);
+		
+		ImageIcon imgIc = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1848534\\pawsbackground.jpg");
+		
+		Image img = imgIc.getImage();
+		Image newImg = img.getScaledInstance(2000, 900, Image.SCALE_SMOOTH);
+		imgIc = new ImageIcon(newImg);
+		
+		JLabel backgroundPane = new JLabel();
+		backgroundPane.setHorizontalAlignment(SwingConstants.CENTER);
+		backgroundPane.setVerticalAlignment(SwingConstants.TOP);
+		backgroundPane.setIcon(imgIc);
+		backgroundPane.setLayout(null);
+		
+		frame.setContentPane(backgroundPane);
+		
+		JPanel pane = new JPanel();
+		
+		pane.setSize(2000, 1100);
+		pane.setOpaque(false);
+		backgroundPane.add(pane, "cell 0 0 2 1,alignx center,aligny top");
+		pane.setLayout(null);
 		
 		JLabel lblStatscatName = new JLabel("Stats(" + cat.getBreed() + ")");
+		lblStatscatName.setBounds(645, -219, 613, 600);
 		lblStatscatName.setForeground(Color.MAGENTA);
-		lblStatscatName.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblStatscatName.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		lblStatscatName.setHorizontalAlignment(SwingConstants.CENTER);
-		frame.getContentPane().add(lblStatscatName, BorderLayout.NORTH);
+		pane.add(lblStatscatName);
 		
-		JXLabel label = new JXLabel("");
-		label.setLineWrap(true);
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		frame.getContentPane().add(label, BorderLayout.CENTER);
+		JXLabel catLbl = new JXLabel("");
+		catLbl.setBounds(652, 149, 592, 726);
+		catLbl.setLineWrap(true);
+		catLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		pane.add(catLbl);
 		ImageIcon imgIc1 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1848534\\tabbycat.png");
 		
 		Image img1 = imgIc1.getImage();
-		Image newImg1 = img1.getScaledInstance(400, 600, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+		Image newImg1 = img1.getScaledInstance(600, 900, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
 		imgIc1 = new ImageIcon (newImg1);
-		label.setIcon(imgIc1); 
-		JXLabel lblStats = new JXLabel("Stats\nBreed:" + cat.getBreed()+ "\nCuteness:" + cat.getCuteness() + "\nIntelligence:" + cat.getIntelligence() + "\nFriendliness:" + cat.getFriendliness() + "\nMax RP:"+ cat.getRP());
-		lblStats.setLineWrap(true);
-		lblStats.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		frame.getContentPane().add(lblStats, BorderLayout.WEST);
+		catLbl.setIcon(imgIc1); 
 		
 		btnFight = new JButton("Fight");
+		btnFight.setBounds(1676, 353, 119, 81);
 		btnFight.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnFight.addActionListener(new StatsClickListener());
+		JXLabel lblStats = new JXLabel("Stats\nBreed:" + cat.getBreed()+ "\nCuteness:" + cat.getCuteness() + "\nIntelligence:" + cat.getIntelligence() + "\nFriendliness:" + cat.getFriendliness() + "\nMax RP:"+ cat.getRP());
+		lblStats.setForeground(Color.GREEN);
+		lblStats.setBounds(218, 137, 332, 600);
+		lblStats.setLineWrap(true);
+		lblStats.setFont(new Font("Tahoma", Font.PLAIN, 32));
+		pane.add(lblStats);
 		btnFight.setForeground(Color.BLACK);
 		btnFight.setBackground(Color.CYAN);
-		frame.getContentPane().add(btnFight, BorderLayout.EAST);
+		pane.add(btnFight);
 		
 	}
 	private class StatsClickListener implements ActionListener{
@@ -90,6 +125,8 @@ public class StatsGUI {
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == btnFight){
 				System.out.print("go to fight GUI");
+				FSController con = new FSController(cat);
+				FSGUI gui = new FSGUI(con);
 			}
 		}
 		
