@@ -1,17 +1,18 @@
 public class Cat {
-	private String breed;
+	private int breed;
 	private int cuteness;
 	private int intelligence;
 	private int friendliness;
 	private int RP;
 	
-	public Cat(String bre, int cute, int smart, int friendly, int R){
+	public Cat(int bre, int cute, int smart, int friendly, int R){
 		breed = bre;
 		cuteness = cute;
+		intelligence = smart;
 		friendliness = friendly;
 		RP = R;
 	}
-	public String getBreed(){
+	public int getBreed(){
 		return breed;
 	}
 	public int getCuteness(){
