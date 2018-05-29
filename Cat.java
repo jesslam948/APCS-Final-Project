@@ -57,10 +57,12 @@ public class Cat {
 		if(breed==7){
 			
 		}
-		if(breed == 8)
+		if(breed == 8){
 			
-		return null;
-		return null;
+		}
+			
+		
+		return new ImageIcon("H:\\New Folder\\questionmark.png");
 	}
 
 	public int getCuteness(){
