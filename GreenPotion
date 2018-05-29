@@ -1,0 +1,58 @@
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.PaintEvent;
+
+import javax.swing.JLabel;
+
+import net.miginfocom.swing.MigLayout;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+
+import javax.swing.SwingConstants;
+import javax.swing.JScrollBar;
+import javax.swing.ScrollPaneConstants;
+
+public class GreenPotion extends Potion{
+	private int GREEN_PRICE;
+	private int G_RP;
+	private ImageIcon greenPic;
+	private int G_INDEX;
+	
+	public GreenPotion(){
+		super();
+		GREEN_PRICE = 3;
+		G_RP = 15;
+		G_INDEX = 3;
+		greenPic = new ImageIcon("H:\\New Folder\\greenpotion.jpg");
+		Image greenPic1 = greenPic.getImage();
+		Image greenPic2 = greenPic1.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+		greenPic = new ImageIcon (greenPic2);
+	}
+	
+	public int getPrice(){
+		return GREEN_PRICE;
+	}
+	public int getRP(){
+		return G_RP;
+	}
+	public ImageIcon getImgIcon(){
+		return greenPic;
+	}
+	public int getIndex(){
+		return G_INDEX;
+	}
+}
