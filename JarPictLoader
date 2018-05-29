@@ -1,0 +1,49 @@
+
+import javax.swing.*;
+import java.net.URL;
+import java.io.*;
+
+public class JarPictLoader {
+
+	private ImageIcon mCat, oCat, BG;
+	
+	public JarPictLoader() {
+		ClassLoader cldr = this.getClass().getClassLoader();
+		
+		try{
+			URL mCatIconURL = cldr.getResource("\\\\dohome5\\home5$\\Student5\\1837947\\BackMottledCat.png");
+			mCat = new ImageIcon(mCatIconURL);
+			
+			URL oCatIconURL = cldr.getResource("\\\\dohome5\\home5$\\Student5\\1837947\\BlackCat.png");
+			oCat = new ImageIcon(oCatIconURL);
+			
+			URL BGIconURL = cldr.getResource("\\\\dohome5\\home5$\\Student5\\1837947\\fightscreen.jpg");
+			BG = new ImageIcon(BGIconURL);
+		}
+		catch (Exception e) {
+			try{
+				PrintStream p = new PrintStream (new FileOutputStream(new File("trace.txt")));
+				p.println("works");
+				e.printStackTrace(p);
+			}
+			catch (Exception e1)
+			{
+			}
+		}
+	}
+	
+	public ImageIcon getmCat()
+	{
+		return mCat;
+	}
+	
+	public ImageIcon getoCat()
+	{
+		return oCat;
+	}
+	
+	public ImageIcon getBG()
+	{
+		return BG;
+	}
+}
