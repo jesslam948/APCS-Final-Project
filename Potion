@@ -1,0 +1,57 @@
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.PaintEvent;
+
+import javax.swing.JLabel;
+
+import net.miginfocom.swing.MigLayout;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+
+import javax.swing.SwingConstants;
+import javax.swing.JScrollBar;
+import javax.swing.ScrollPaneConstants;
+
+public class Potion implements Item{
+	private int POTION_PRICE;
+	private int RP;
+	private ImageIcon potionPic;
+	private int P_INDEX;
+	
+	public Potion(){
+		POTION_PRICE = 0;
+		RP = 0;
+		P_INDEX = -1;
+		potionPic = new ImageIcon("H:\\New Folder\\questionmark.png");
+		Image potionPic1 = potionPic.getImage();
+		Image potionPic2 = potionPic1.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+		potionPic = new ImageIcon (potionPic2);
+	}
+	
+	public int getPrice(){
+		return POTION_PRICE;
+	}
+	public int getRP(){
+		return RP;
+	}
+	public ImageIcon getImgIcon(){
+		return potionPic;
+	}
+	public int getIndex(){
+		return P_INDEX;
+	}
+}
