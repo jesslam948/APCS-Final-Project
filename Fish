@@ -1,0 +1,53 @@
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.PaintEvent;
+
+import javax.swing.JLabel;
+
+import net.miginfocom.swing.MigLayout;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+
+import javax.swing.SwingConstants;
+import javax.swing.JScrollBar;
+import javax.swing.ScrollPaneConstants;
+
+public class Fish implements Item{
+	private int FISH_PRICE;
+	private ImageIcon fishPic;
+	private int F_INDEX;
+	
+	public Fish(){
+		FISH_PRICE = 5;
+		F_INDEX = 0;
+		fishPic = new ImageIcon("H:\\New Folder\\fish.png");
+		Image fishPic1 = fishPic.getImage();
+		Image fishPic2 = fishPic1.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+		fishPic = new ImageIcon (fishPic2);
+		
+	}
+	
+	public int getPrice(){
+		return FISH_PRICE;
+	}
+	public ImageIcon getImgIcon(){
+		return fishPic;
+	}
+	public int getIndex(){
+		return F_INDEX;
+	}
+}
