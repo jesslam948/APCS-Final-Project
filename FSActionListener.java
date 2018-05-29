@@ -1,6 +1,8 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Timer;
+
 
 public class FSActionListener implements ActionListener{
 	private final FSGUI fscreen;
@@ -27,15 +29,20 @@ public class FSActionListener implements ActionListener{
 		{
 			control.decRP("my", 3);
 		}
-		else
+		else if (e.getActionCommand().equals("Move 4"))
 		{
 			control.decRP("my", 4);
 		}
-		
+		else
+		{
+			control.openInv();
+		}
+
 		if (!fscreen.hasEnded())
 		{
 			control.compAttack();
 		}
+
 	}
 
 }
