@@ -1,3 +1,5 @@
+import java.awt.EventQueue;
+
 
 public class FSController {
 	private FSGUI myGui;
@@ -31,7 +33,8 @@ public class FSController {
 		int friendly = myCat.getFriendliness() + (int)(Math.random() * 5);
 		int R = myCat.getRP() + (int)(Math.random() * 5);
 		
-		Cat other = new Cat("Tabby", cute, smart, friendly, R); // need a way to randomly generate breed
+		Cat other = new Cat("Tabby", cute, smart, friendly, R); // need a way to randomly generate breed 
+		//New Thought: have an arrayList of breeds and choose a random number that corresponds with a spot in the list
 		
 		return other;
 	}
@@ -97,7 +100,7 @@ public class FSController {
 				otherRP = 0;
 			else
 				otherRP -= pts;
-			myGui.decRP("other", otherRP, otherCat.getRP());
+			myGui.changeRP("other", otherRP, otherCat.getRP());
 			myGui.moveDone("other", move , pts);
 		}
 		else
@@ -106,7 +109,7 @@ public class FSController {
 				myRP = 0;
 			else
 				myRP -= pts;
-			myGui.decRP("my", myRP, myCat.getRP());
+			myGui.changeRP("my", myRP, myCat.getRP());
 			myGui.moveDone("my", move , pts);
 		}
 		
@@ -120,5 +123,61 @@ public class FSController {
 			isEnded = true;
 			myGui.isEnd("won");
 		}
+	}
+	
+	public void incRP(String user, int potion)
+	{
+		int pts = 0;
+		Cat theCat = null;
+		
+		if (user.equals("my"))
+			theCat = myCat;
+		else
+			theCat = otherCat;
+		
+		switch (potion)
+		{
+		case 1:
+			pts = 15;
+			break;
+		case 2:
+			pts = 10;
+			break;
+		case 3:
+			pts = 5;
+			break;
+		}
+		
+		if (theCat.equals(myCat))
+		{
+			if (pts + myRP >= myCat.getRP())
+				myRP = myCat.getRP();
+			else
+				myRP += pts;
+			myGui.changeRP("my", myRP, myCat.getRP());
+			myGui.moveDone("my", potion , pts);
+		}
+		else
+		{
+			if (pts + otherRP >= otherCat.getRP())
+				otherRP = otherCat.getRP();
+			else
+				otherRP += pts;
+			myGui.changeRP("other", otherRP, otherCat.getRP());
+			myGui.moveDone("other", potion , pts);
+		}
+	}
+	
+	public void openInv()
+	{
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					InventoryGUI window = new InventoryGUI();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
