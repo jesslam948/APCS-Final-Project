@@ -1,0 +1,101 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.GridBagLayout;
+import javax.swing.JButton;
+import java.awt.GridBagConstraints;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Insets;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import net.miginfocom.swing.MigLayout;
+
+
+public class InventoryGUI {
+
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					InventoryGUI window = new InventoryGUI();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public InventoryGUI() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frame.setVisible(true);
+		
+		JButton Fish = new JButton("Fish");
+		Fish.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		frame.getContentPane().setLayout(new MigLayout("", "[50px][50px][50px][50px][50px]", "[25px][25px][25px][20px][25px][25px]"));
+		
+		JLabel lblNewLabel = new JLabel("INVENTORY");
+		frame.getContentPane().add(lblNewLabel, "cell 0 0 5 1,alignx center,aligny center");
+		
+		JLabel FishPic = new JLabel("Fish");
+		frame.getContentPane().add(FishPic, "cell 0 1,alignx center,aligny center");
+		frame.getContentPane().add(Fish, "cell 1 1 1 2,grow");
+		
+		JLabel GreenPic = new JLabel("Green");
+		frame.getContentPane().add(GreenPic, "cell 3 1,alignx center,aligny center");
+		
+		JButton GreenPotion = new JButton("Green");
+		frame.getContentPane().add(GreenPotion, "cell 4 1 1 2,grow");
+		
+		JLabel FishNum = new JLabel("X 4");
+		FishNum.setHorizontalAlignment(SwingConstants.CENTER);
+		frame.getContentPane().add(FishNum, "cell 0 2,alignx center,aligny center");
+		
+		JLabel GreenNum = new JLabel("X 4");
+		GreenNum.setHorizontalAlignment(SwingConstants.CENTER);
+		frame.getContentPane().add(GreenNum, "cell 3 2,alignx center,aligny center");
+		
+		JLabel OrangePic = new JLabel("Orange");
+		frame.getContentPane().add(OrangePic, "cell 0 4,alignx center,aligny center");
+		
+		JButton OrangePotion = new JButton("Orange");
+		frame.getContentPane().add(OrangePotion, "cell 1 4 1 2,grow");
+		
+		JLabel PurplePic = new JLabel("Purple");
+		frame.getContentPane().add(PurplePic, "cell 3 4,alignx center,aligny center");
+		
+		JButton PurplePotion = new JButton("Purple");
+		frame.getContentPane().add(PurplePotion, "cell 4 4 1 2,grow");
+		
+		JLabel OrangeNum = new JLabel("X 4");
+		OrangeNum.setHorizontalAlignment(SwingConstants.CENTER);
+		frame.getContentPane().add(OrangeNum, "cell 0 5,alignx center,aligny center");
+		
+		JLabel PurpleNum = new JLabel("X 4");
+		frame.getContentPane().add(PurpleNum, "cell 3 5,alignx center,aligny center");
+	}
+
+	///TODO show msg dialoge to make sure option chosen is wanted + pass action into FSCOntroller and close inventory window + decrease item num
+}
