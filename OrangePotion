@@ -1,0 +1,58 @@
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.PaintEvent;
+
+import javax.swing.JLabel;
+
+import net.miginfocom.swing.MigLayout;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+
+import javax.swing.SwingConstants;
+import javax.swing.JScrollBar;
+import javax.swing.ScrollPaneConstants;
+
+public class OrangePotion extends Potion{
+	private int ORANGE_PRICE;
+	private int O_RP;
+	private ImageIcon orangePic;
+	private int O_INDEX;
+	
+	public OrangePotion(){
+		super();
+		ORANGE_PRICE = 2;
+		O_RP = 10;
+		O_INDEX = 2;
+		orangePic = new ImageIcon("H:\\New Folder\\orangepotion.jpg");
+		Image orangePic1 = orangePic.getImage();
+		Image orangePic2 = orangePic1.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+		orangePic = new ImageIcon (orangePic2);
+	}
+	
+	public int getPrice(){
+		return ORANGE_PRICE;
+	}
+	public int getRP(){
+		return O_RP;
+	}
+	public ImageIcon getImgIcon(){
+		return orangePic;
+	}
+	public int getIndex(){
+		return O_INDEX;
+	}
+}
