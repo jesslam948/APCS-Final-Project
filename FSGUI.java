@@ -39,7 +39,11 @@ public class FSGUI {
 	private JButton Move2;
 	private JButton Move3;
 	private JButton Move4;
+	private JButton Inventory;
 	private boolean isDone;
+	private ImageIcon BG;
+	private ImageIcon mCat;
+	private ImageIcon oCat;
 	
 
 	/**
@@ -47,12 +51,21 @@ public class FSGUI {
 	 */
 	public FSGUI(FSController control) {
 		myControl = control;
+		GuiPictLoader();
 		initialize();
 	}
 	
 	public FSController getControl()
 	{
 		return myControl;
+	}
+	
+	public void GuiPictLoader() {
+		JarPictLoader load = new JarPictLoader();
+		
+		BG = load.getBG();
+		mCat = load.getmCat();
+		oCat = load.getoCat();
 	}
 
 	/**
@@ -70,16 +83,16 @@ public class FSGUI {
 		
 		isDone = false;
 		
-		ImageIcon imgIc = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\fightscreen.jpg");
+//		ImageIcon imgIc = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\fightscreen.jpg");
 		
-		Image img = imgIc.getImage();
+		Image img = BG.getImage();
 		Image newImg = img.getScaledInstance(2000, 900, Image.SCALE_SMOOTH);
-		imgIc = new ImageIcon(newImg);
+		BG = new ImageIcon(newImg);
 		
 		JLabel backgroundPane = new JLabel();
 		backgroundPane.setHorizontalAlignment(SwingConstants.CENTER);
 		backgroundPane.setVerticalAlignment(SwingConstants.TOP);
-		backgroundPane.setIcon(imgIc);
+		backgroundPane.setIcon(BG);
 		backgroundPane.setLayout(null);
 		
 		frame.setContentPane(backgroundPane);
@@ -89,7 +102,7 @@ public class FSGUI {
 		pane.setSize(2000, 1100);
 		pane.setOpaque(false);
 		backgroundPane.add(pane, "cell 0 0 2 1,alignx center,aligny top");
-		pane.setLayout(new MigLayout("", "[600px][700px][600px]", "[40px][5][200px][200px][10px][5][200px][210px][100px]"));
+		pane.setLayout(new MigLayout("", "[600px][700px][600px]", "[1px][34px][200px][156px][1px][44px][426px][140px]"));
 		
 		OCatRP = new JProgressBar();
 		OCatRP.setForeground(Color.GREEN);
@@ -102,13 +115,13 @@ public class FSGUI {
 		pane.add(OtherCat, "cell 2 1 1 5,alignx center,aligny center");
 		
 		OtherCat.setMinimumSize(new Dimension(400, 400));
-		ImageIcon imgIc1 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\BlackCat.png");
+//		ImageIcon imgIc1 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\BlackCat.png");
 		
-		Image img1 = imgIc1.getImage();
+		Image img1 = oCat.getImage();
 		Image newImg1 = img1.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
-		imgIc1 = new ImageIcon (newImg1);
+		oCat = new ImageIcon (newImg1);
 		
-		OtherCat.setIcon(imgIc1);
+		OtherCat.setIcon(oCat);
 		
 		oRP = new JLabel("");
 		pane.add(oRP, "cell 2 0,alignx trailing,aligny center");
@@ -124,13 +137,13 @@ public class FSGUI {
 		pane.add(MyCat, "cell 0 5 1 3,alignx center,aligny top");
 		
 		MyCat.setMinimumSize(new Dimension(600, 600));
-		ImageIcon imgIc2 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\BackMottledCat.png");
+//		ImageIcon imgIc2 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\BackMottledCat.png");
 		
-		Image img2 = imgIc2.getImage();
+		Image img2 = mCat.getImage();
 		Image newImg2 = img2.getScaledInstance(600, 600, Image.SCALE_SMOOTH);
-		imgIc2 = new ImageIcon (newImg2);
+		mCat = new ImageIcon (newImg2);
 		
-		MyCat.setIcon(imgIc2);
+		MyCat.setIcon(mCat);
 		
 		
 		mRP = new JLabel("");
@@ -138,9 +151,10 @@ public class FSGUI {
 		
 		
 		JPanel panel = new JPanel();
-		pane.add(panel, "cell 0 8 3 1,alignx center,aligny bottom");
-		panel.setLayout(new MigLayout("", "[800px][800px][300px]", "[50px][50px]"));
 		panel.setOpaque(false);
+		panel.setBackground(Color.BLACK);
+		pane.add(panel, "cell 0 7 3 1,alignx left,aligny center");
+		panel.setLayout(new MigLayout("", "[790px][790px][305px]", "[60px][60px][20px]"));
 		
 		Move1 = new JButton("Move 1");
 		panel.add(Move1, "cell 0 0,grow");
@@ -154,32 +168,45 @@ public class FSGUI {
 		Move4 = new JButton("Move 4");
 		panel.add(Move4, "cell 1 1,grow");
 		
+		Inventory = new JButton("Inventory");
+		panel.add(Inventory, "cell 2 0 1 2,grow");
+		
 		FSActionListener l = new FSActionListener(this);
 		
 		Move4.addActionListener(l);
 		Move3.addActionListener(l);
 		Move2.addActionListener(l);
 		Move1.addActionListener(l);
+		Inventory.addActionListener(l);
 	}
 	
-	public void moveDone(String defender, int move, int pts)
+	public void moveDone(String defender, int action, int pts)
 	{
-		String moveName = "";
+		String actionName = "";
 		String cat = "";
 		
-		switch (move)
+		switch (action)
 		{
 		case 1:
-			moveName = Move1.getText() + "! - " + pts + "pts!";
+			actionName = Move1.getText() + "! - " + pts + "pts!";
 			break;
 		case 2:
-			moveName = Move2.getText() + "! - " + pts + "pts!";
+			actionName = Move2.getText() + "! - " + pts + "pts!";
 			break;
 		case 3:
-			moveName = Move3.getText() + "! - " + pts + "pts!";
+			actionName = Move3.getText() + "! - " + pts + "pts!";
 			break;
 		case 4:
-			moveName = Move4.getText() + "! - " + pts + "pts!";
+			actionName = Move4.getText() + "! - " + pts + "pts!";
+			break;
+		case 5:
+			actionName = "Green" + "! + " + pts + "pts!";
+			break;
+		case 6:
+			actionName = "Orange" + "! + " + pts + "pts!";
+			break;
+		case 7:
+			actionName = "Pink" + "! + " + pts + "pts!";
 			break;
 		}
 		
@@ -188,7 +215,7 @@ public class FSGUI {
 		else
 			cat = "You used ";
 		
-		JOptionPane.showMessageDialog(frame, cat + moveName);
+		JOptionPane.showMessageDialog(frame, cat + actionName);
 	}
 	
 	public void setRP(Cat my, Cat other)
@@ -205,7 +232,7 @@ public class FSGUI {
 		OCatRP.setValue(otRP);
 	}
 	
-	public void decRP(String defender, int newRP, int oldRP)
+	public void changeRP(String defender, int newRP, int oldRP)
 	{
 		if (defender.equals("my"))
 		{
@@ -224,6 +251,9 @@ public class FSGUI {
 		JOptionPane.showMessageDialog(frame, "You " + result + "!");
 		
 		isDone = true;
+		
+		frame.setVisible(false);
+		frame.dispose();
 	}
 	
 	public boolean hasEnded()
