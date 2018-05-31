@@ -1,9 +1,8 @@
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 
 import java.awt.*;          // access to Container
-import java.awt.event.*;    // access to WindowAdapter, WindowEvent
 
 import javax.swing.*;       // access to JFrame and JComponents
 
@@ -15,30 +14,20 @@ public class MenuGUI{
 
 	private JFrame frame;
 	private CatList catList;
-
+	private JarPictLoader j;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MenuGUI window = new MenuGUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
 	 */
 	
 	
-	public MenuGUI() {
-		catList = new CatList();
+	public MenuGUI(CatList cl, JarPictLoader loader) {
+		catList = cl;
+		j = loader;
 		initialize();
 		frame.setVisible(true);
 	}
@@ -68,7 +57,7 @@ public class MenuGUI{
 		layeredPane.add(panel, "cell 0 1,grow");
 		*/
 		
-		ImageIcon imgIc = new ImageIcon("H:\\New Folder\\cat background big.jpg");
+		ImageIcon imgIc = j.getfightScreenBG();
 		Image img = imgIc.getImage();
 		Image newImg = img.getScaledInstance(2000, 2000, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
 		imgIc = new ImageIcon (newImg);
@@ -84,7 +73,7 @@ public class MenuGUI{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		*/
 		
-		MClickListener l = new MClickListener(this);
+		MenuClickListener l = new MenuClickListener(this);
 		
 		JButton fightButton = new JButton("Cats");
 		fightButton.setBounds(900, 400, 200, 100);
@@ -99,7 +88,7 @@ public class MenuGUI{
 		
 	}
 	public void cats(){
-		CLGUI c = new CLGUI(catList);
+		CLGUI c = new CLGUI(catList, j);
 	}
 	
 	public void delete(){
@@ -110,6 +99,6 @@ public class MenuGUI{
 
 	
 
-	private static void addPopup(Component component, final JPopupMenu popup) {
-	}
+//	private static void addPopup(Component component, final JPopupMenu popup) {
+//	}
 }
