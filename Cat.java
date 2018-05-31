@@ -39,15 +39,15 @@ public class Cat {
 		return null;
 	}
 	
-	public ImageIcon getImgIcon(){
+	public ImageIcon getImgIcon(JarPictLoader j){
 		if(breed == 0)
-			return new ImageIcon("H:\\MottledCat.png");
+			return j.getMottledCat();
 		if(breed == 1)
-			return new ImageIcon("\\\\dohome5\\home5$\\Student5\\1848534\\blackcat.png");
+			return j.getBlackCat();
 		if(breed==2)
-			return new ImageIcon("\\\\dohome5\\home5$\\Student5\\1848534\\tabbycat.png");
+			return j.getTabbyCat();
 		if(breed==3)
-			
+			return j.getWhiteCat();
 		if(breed==4)
 			
 		if(breed == 5)
@@ -57,12 +57,10 @@ public class Cat {
 		if(breed==7){
 			
 		}
-		if(breed == 8){
+		if(breed == 8)
 			
-		}
-			
-		
-		return new ImageIcon("H:\\New Folder\\questionmark.png");
+		return null;
+		return null;
 	}
 
 	public int getCuteness(){
