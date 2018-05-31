@@ -33,7 +33,7 @@ public class FSController {
 		int friendly = myCat.getFriendliness() + (int)(Math.random() * 5);
 		int R = myCat.getRP() + (int)(Math.random() * 5);
 		
-		Cat other = new Cat("Tabby", cute, smart, friendly, R); // need a way to randomly generate breed 
+		Cat other = new Cat(2, cute, smart, friendly, R); // need a way to randomly generate breed 
 		//New Thought: have an arrayList of breeds and choose a random number that corresponds with a spot in the list
 		
 		return other;
@@ -170,14 +170,14 @@ public class FSController {
 	
 	public void openInv()
 	{
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InventoryGUI window = new InventoryGUI();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					InventoryGUI window = new InventoryGUI();
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
 	}
 }
