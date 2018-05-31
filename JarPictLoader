@@ -1,24 +1,32 @@
 
 import javax.swing.*;
-import java.net.URL;
 import java.io.*;
 
 public class JarPictLoader {
 
-	private ImageIcon mCat, oCat, BG;
+	private ImageIcon backMottledCat, blackCat, fightScreenBG, whiteCat, tabbyCat, mottledCat, CSBG, statsBG, qMark;
 	
 	public JarPictLoader() {
 		ClassLoader cldr = this.getClass().getClassLoader();
 		
 		try{
-			URL mCatIconURL = cldr.getResource("\\\\dohome5\\home5$\\Student5\\1837947\\BackMottledCat.png");
-			mCat = new ImageIcon(mCatIconURL);
 			
-			URL oCatIconURL = cldr.getResource("\\\\dohome5\\home5$\\Student5\\1837947\\BlackCat.png");
-			oCat = new ImageIcon(oCatIconURL);
+			backMottledCat = new ImageIcon(cldr.getResource("backmottledcat.png"));
+			CSBG = new ImageIcon(cldr.getResource("pawsbackground.jpg"));
+			statsBG = new ImageIcon(cldr.getResource("pawsbackground.jpg"));
+//			oPotion = new ImageIcon(cldr.getResource("orangepotion.jpg"));
+//			pPotion = new ImageIcon(cldr.getResource("pinkpotion.jpg"));
+//			gPotion = new ImageIcon(cldr.getResource("greenpotion.jpg"));
+//			fish = new ImageIcon(cldr.getResource("Fish_Drawing.png"));
+			whiteCat = new ImageIcon(cldr.getResource("whitecat.png"));
+			qMark = new ImageIcon(cldr.getResource("questionmark.png"));
+			tabbyCat = new ImageIcon(cldr.getResource("tabbycat.png"));
+			mottledCat = new ImageIcon(cldr.getResource("MottledCat.png"));
+
 			
-			URL BGIconURL = cldr.getResource("\\\\dohome5\\home5$\\Student5\\1837947\\fightscreen.jpg");
-			BG = new ImageIcon(BGIconURL);
+			blackCat = new ImageIcon(cldr.getResource("blackcat.png"));
+			
+			fightScreenBG = new ImageIcon(cldr.getResource("fightscreen.jpg"));
 		}
 		catch (Exception e) {
 			try{
@@ -32,18 +40,53 @@ public class JarPictLoader {
 		}
 	}
 	
-	public ImageIcon getmCat()
+	public ImageIcon getBlackCat()
 	{
-		return mCat;
+		return blackCat;
 	}
 	
-	public ImageIcon getoCat()
+	public ImageIcon getbMottledCat()
 	{
-		return oCat;
+		return backMottledCat;
 	}
 	
-	public ImageIcon getBG()
+	public ImageIcon getfightScreenBG()
 	{
-		return BG;
+		return fightScreenBG;
 	}
+	public ImageIcon getWhiteCat()
+	{
+		return whiteCat;
+	}
+	public ImageIcon getMottledCat(){
+		return mottledCat;
+	}
+	public ImageIcon getTabbyCat(){
+		return tabbyCat;
+	}
+	public ImageIcon getCSBG(){
+		return CSBG;
+	}
+	public ImageIcon getStatsBG(){
+		return statsBG;
+	}
+	
+//	public ImageIcon getOPotion(){
+//		return oPotion;
+//	}
+//	public ImageIcon getGPotion(){
+//		return gPotion;
+//	}
+//	public ImageIcon getPPotion(){
+//		return pPotion;
+//	}
+	public ImageIcon getQMark(){
+		return qMark;
+	}
+//	public ImageIcon getFish(){
+//		return fish;
+//	}
+	
+	
+		
 }
