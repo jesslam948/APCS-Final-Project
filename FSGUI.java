@@ -1,5 +1,4 @@
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Image;
 
 import javax.swing.JFrame;
@@ -8,19 +7,17 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JButton;
 
-import java.awt.Panel;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import javax.swing.JLayeredPane;
+
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
-import java.awt.Toolkit;
+
 
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
+
 
 import java.awt.Color;
 
@@ -29,6 +26,8 @@ import javax.swing.JProgressBar;
 
 public class FSGUI {
 
+	private JarPictLoader j;
+	private CatList catlist;
 	private JFrame frame;
 	private FSController myControl;
 	private JProgressBar OCatRP;
@@ -41,31 +40,22 @@ public class FSGUI {
 	private JButton Move4;
 	private JButton Inventory;
 	private boolean isDone;
-	private ImageIcon BG;
-	private ImageIcon mCat;
-	private ImageIcon oCat;
 	
 
 	/**
 	 * Create the application.
 	 */
-	public FSGUI(FSController control) {
+	public FSGUI(FSController control, JarPictLoader loader, CatList cl) {
 		myControl = control;
-		GuiPictLoader();
+		j = loader;
+		catlist = cl;
 		initialize();
+		
 	}
 	
 	public FSController getControl()
 	{
 		return myControl;
-	}
-	
-	public void GuiPictLoader() {
-		JarPictLoader load = new JarPictLoader();
-		
-		BG = load.getBG();
-		mCat = load.getmCat();
-		oCat = load.getoCat();
 	}
 
 	/**
@@ -83,16 +73,16 @@ public class FSGUI {
 		
 		isDone = false;
 		
-//		ImageIcon imgIc = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\fightscreen.jpg");
+		ImageIcon imgIc = j.getfightScreenBG();
 		
-		Image img = BG.getImage();
+		Image img = imgIc.getImage();
 		Image newImg = img.getScaledInstance(2000, 900, Image.SCALE_SMOOTH);
-		BG = new ImageIcon(newImg);
+		imgIc = new ImageIcon(newImg);
 		
 		JLabel backgroundPane = new JLabel();
 		backgroundPane.setHorizontalAlignment(SwingConstants.CENTER);
 		backgroundPane.setVerticalAlignment(SwingConstants.TOP);
-		backgroundPane.setIcon(BG);
+		backgroundPane.setIcon(imgIc);
 		backgroundPane.setLayout(null);
 		
 		frame.setContentPane(backgroundPane);
@@ -115,7 +105,7 @@ public class FSGUI {
 		pane.add(OtherCat, "cell 2 1 1 5,alignx center,aligny center");
 		
 		OtherCat.setMinimumSize(new Dimension(400, 400));
-//		ImageIcon imgIc1 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\BlackCat.png");
+		ImageIcon oCat = j.getBlackCat();
 		
 		Image img1 = oCat.getImage();
 		Image newImg1 = img1.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
@@ -137,7 +127,7 @@ public class FSGUI {
 		pane.add(MyCat, "cell 0 5 1 3,alignx center,aligny top");
 		
 		MyCat.setMinimumSize(new Dimension(600, 600));
-//		ImageIcon imgIc2 = new ImageIcon("\\\\dohome5\\home5$\\Student5\\1837947\\BackMottledCat.png");
+		ImageIcon mCat = j.getbMottledCat();
 		
 		Image img2 = mCat.getImage();
 		Image newImg2 = img2.getScaledInstance(600, 600, Image.SCALE_SMOOTH);
@@ -254,6 +244,8 @@ public class FSGUI {
 		
 		frame.setVisible(false);
 		frame.dispose();
+		
+		MenuGUI menu = new MenuGUI(catlist, j);
 	}
 	
 	public boolean hasEnded()
