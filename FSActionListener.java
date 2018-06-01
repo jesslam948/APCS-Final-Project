@@ -15,6 +15,7 @@ public class FSActionListener implements ActionListener{
 	public void actionPerformed(ActionEvent e)
 	{
 		FSController control = fscreen.getControl();
+		boolean invClicked = false;
 		
 		if (e.getActionCommand().equals("Move 1"))
 		{
@@ -32,16 +33,16 @@ public class FSActionListener implements ActionListener{
 		{
 			control.decRP("my", 4);
 		}
-		else
+		else if (e.getActionCommand().equals("Inventory"))
 		{
+			invClicked = true;
 			control.openInv();
 		}
 
-		if (!fscreen.hasEnded())
+		if (!fscreen.hasEnded() && !invClicked)
 		{
 			control.compAttack();
 		}
-
 	}
 
 }
