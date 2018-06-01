@@ -24,4 +24,8 @@ public class CatList{
 	public Cat getCat(int i){
 		return catList.get(i);
 	}
+	
+	public Cat getOpposeCat(int i){
+		return opposeCats.get(i);
+	}
 }
