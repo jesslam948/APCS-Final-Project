@@ -10,16 +10,21 @@ public class FSController {
 	private Cat otherCat;
 	private int myRP;
 	private int otherRP;
+	private int counter;
 	private boolean isEnded;
 	private ArrayList<Integer> potions;
+	private JarPictLoader j;
+	private CatList cl;
 	
-	public FSController(Cat cat)
+	public FSController(Cat cat, JarPictLoader jar)
 	{
 		myCat = cat;
 		myRP = myCat.getRP();
 		
 		otherCat = setOtherCat();
 		otherRP = otherCat.getRP();
+		
+		counter = 1;
 		
 		isEnded = false;
 		
@@ -28,12 +33,15 @@ public class FSController {
 		potions.add(1);
 		potions.add(2);
 		potions.add(3);
+		
+		j = jar;
 	}
 
 	public void setGui (FSGUI gui)
 	{
 		myGui = gui;
 		setRP();
+		cl = myGui.getList();
 	}
 	
 	public Cat setOtherCat()
@@ -43,9 +51,12 @@ public class FSController {
 		int friendly = myCat.getFriendliness() + (int)(Math.random() * 5);
 		int R = myCat.getRP() + (int)(Math.random() * 5);
 		
-		Cat other = new Cat(2, cute, smart, friendly, R); // need a way to randomly generate breed 
-		//New Thought: have an arrayList of breeds and choose a random number that corresponds with a spot in the list
+		if (counter == myCat.getBreed())
+			counter++;
 		
+		Cat other = new Cat(counter, cute, smart, friendly, R);
+		
+		counter++;
 		return other;
 	}
 	
@@ -54,7 +65,7 @@ public class FSController {
 		myGui.setRP(myCat, otherCat);
 	}
 	
-	public ImageIcon setCat(String cat, JarPictLoader j)
+	public ImageIcon setCat(String cat)
 	{
 		if (cat.equals("my"))
 			return myCat.getImgIcon(j);
@@ -111,16 +122,16 @@ public class FSController {
 		switch (move)
 		{
 		case 1:
-			pts = (int)((theCat.getCuteness()/2) * Math.random()) + 1;
+			pts = (int)((theCat.getCuteness()/3) * Math.random()) + 1;
 			break;
 		case 2:
-			pts = (int)((theCat.getIntelligence()/2) * Math.random()) + 1;
+			pts = (int)((theCat.getIntelligence()/3) * Math.random()) + 1;
 			break;
 		case 3:
-			pts = (int)((theCat.getFriendliness()/2) * Math.random()) + 1;
+			pts = (int)((theCat.getFriendliness()/3) * Math.random()) + 1;
 			break;
 		case 4:
-			pts = (int)((theCat.getCuteness()/2) * Math.random()) + 1;
+			pts = (int)((theCat.getCuteness()/3) * Math.random()) + 1;
 			break;
 		}
 		
@@ -148,12 +159,12 @@ public class FSController {
 		if (myRP == 0)
 		{
 			isEnded = true;
-			myGui.isEnd("lost");
+			myGui.isEnd("lost! Let your cat rest!");
 		}
 		else if (otherRP == 0)
 		{
 			isEnded = true;
-			myGui.isEnd("won");
+			myGui.isEnd("lost! The other cat ran away!");
 		}
 	}
 	
@@ -214,11 +225,17 @@ public class FSController {
 		
 /////add the other cat to the catlist
 		
+		if (isCaught)
+		{
+			cl.addCat(otherCat);
+			myGui.isEnd("caught the other cat! Congratulations!");
+		}
+		
 		return isCaught;
 	}
 	
 	public void openInv()
 	{
-		InventoryGUI window = new InventoryGUI(this);
+		InventoryGUI window = new InventoryGUI(this, j);
 	}
 }
