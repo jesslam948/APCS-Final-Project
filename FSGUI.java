@@ -57,7 +57,12 @@ public class FSGUI {
 	{
 		return myControl;
 	}
-
+	
+	public CatList getList()
+	{
+		return catlist;
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -105,7 +110,7 @@ public class FSGUI {
 		pane.add(OtherCat, "cell 2 1 1 5,alignx center,aligny center");
 		
 		OtherCat.setMinimumSize(new Dimension(400, 400));
-		ImageIcon oCat = myControl.setCat("other", j);
+		ImageIcon oCat = myControl.setCat("other");
 		
 		Image img1 = oCat.getImage();
 		Image newImg1 = img1.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
@@ -127,7 +132,7 @@ public class FSGUI {
 		pane.add(MyCat, "cell 0 5 1 3,alignx center,aligny top");
 		
 		MyCat.setMinimumSize(new Dimension(600, 600));
-		ImageIcon mCat = myControl.setCat("my", j);
+		ImageIcon mCat = myControl.setCat("my");
 		
 		Image img2 = mCat.getImage();
 		Image newImg2 = img2.getScaledInstance(600, 600, Image.SCALE_SMOOTH);
