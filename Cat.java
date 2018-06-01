@@ -17,49 +17,64 @@ public class Cat {
 		return breed;
 	}
 	public String breedToString(){
-		if(breed == 0)
+		if(breed == 0){
 			return "Mottled";
-		if(breed == 1)
+		}
+		if(breed == 1){
 			return "Black";
-		if(breed==2)
+		}
+		if(breed==2){
 			return "Tabby";
-		if(breed==3)
+		}
+		if(breed==3){
 			return "White";
-		if(breed==4)
+		}
+		if(breed==4){
 			return "Siamese";
-		if(breed == 5)
+		}
+		if(breed == 5){
 			return "Tuxedo";
-		if(breed == 6)
+		}
+		if(breed == 6){
 			return "Calico";
+		}
 		if(breed==7){
 			return "Bengal";
 		}
-		if(breed == 8)
+		if(breed == 8){
 			return "Russian Blue";
+		}
 		return null;
 	}
 	
-	public ImageIcon getImgIcon(JarPictLoader j){
-		if(breed == 0)
+	public ImageIcon getImgIcon(JarLoader j){
+		if(breed == 0){
 			return j.getMottledCat();
-		if(breed == 1)
+		}
+		if(breed == 1){
 			return j.getBlackCat();
-		if(breed==2)
+		}
+		if(breed== 2){
 			return j.getTabbyCat();
-		if(breed==3)
+		}
+		if(breed== 3){
 			return j.getWhiteCat();
-		if(breed==4)
+		}
+		if(breed== 4){
 			
-		if(breed == 5)
+		}
+		if(breed == 5){
 			
-		if(breed == 6)
+		}
+		if(breed == 6){
 			
+		}
 		if(breed==7){
 			
 		}
-		if(breed == 8)
+		if(breed == 8){
 			
-		return null;
+		}
 		return null;
 	}
 
@@ -73,6 +88,18 @@ public class Cat {
 		return friendliness;
 	}
 	public int getRP(){
+		return RP;
+	}
+	public int setCuteness(){
+		return cuteness;
+	}
+	public int setIntelligence(){
+		return intelligence;
+	}
+	public int setFriendliness(){
+		return friendliness;
+	}
+	public int setRP(){
 		return RP;
 	}
 }
