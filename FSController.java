@@ -1,4 +1,7 @@
 import java.awt.EventQueue;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 
 
 public class FSController {
@@ -8,6 +11,7 @@ public class FSController {
 	private int myRP;
 	private int otherRP;
 	private boolean isEnded;
+	private ArrayList<Integer> potions;
 	
 	public FSController(Cat cat)
 	{
@@ -18,6 +22,12 @@ public class FSController {
 		otherRP = otherCat.getRP();
 		
 		isEnded = false;
+		
+		potions = new ArrayList<Integer>();
+		
+		potions.add(1);
+		potions.add(2);
+		potions.add(3);
 	}
 
 	public void setGui (FSGUI gui)
@@ -44,6 +54,14 @@ public class FSController {
 		myGui.setRP(myCat, otherCat);
 	}
 	
+	public ImageIcon setCat(String cat, JarPictLoader j)
+	{
+		if (cat.equals("my"))
+			return myCat.getImgIcon(j);
+		else
+			return otherCat.getImgIcon(j);
+	}
+	
 	public int getMRP()
 	{
 		return myRP;
@@ -63,7 +81,21 @@ public class FSController {
 	{
 		int randNum = (int)(Math.random() * 4) + 1;
 		
-		decRP("other", randNum);
+		int altRandNum = (int) (Math.random() * 20) + 1;
+		
+		int move = 0;
+		
+		if (otherRP <= 3)
+			move = potions.remove((int)(Math.random() * potions.size()));
+		else if (otherRP <= 6 && altRandNum <= 5)
+			move = potions.remove((int)(Math.random() * potions.size()));
+		else if (otherRP <= 9 && altRandNum <= 3)
+			move = potions.remove((int)(Math.random() * potions.size()));
+		
+		if (move == 0)
+			decRP("other", randNum);
+		else
+			incRP("other", move);
 	}
 	
 	public void decRP(String attacker, int move)
@@ -138,13 +170,13 @@ public class FSController {
 		switch (potion)
 		{
 		case 1:
-			pts = 15;
+			pts = 5;
 			break;
 		case 2:
 			pts = 10;
 			break;
 		case 3:
-			pts = 5;
+			pts = 15;
 			break;
 		}
 		
@@ -168,16 +200,25 @@ public class FSController {
 		}
 	}
 	
+	public boolean fishCaught()
+	{
+		boolean isCaught = false;
+		int random = (int)(10 * Math.random()) + 1;
+		
+		if (otherRP <= 3)
+			isCaught = true;
+		else if (otherRP <= 6 && random <= 5)
+			isCaught = true;
+		else if (otherRP <= 9 && random <= 3)
+			isCaught = true;
+		
+/////add the other cat to the catlist
+		
+		return isCaught;
+	}
+	
 	public void openInv()
 	{
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					InventoryGUI window = new InventoryGUI();
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
+		InventoryGUI window = new InventoryGUI(this);
 	}
 }
