@@ -1,20 +1,31 @@
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Image;
 
 import javax.swing.JFrame;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JButton;
+
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Insets;
+
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
 import net.miginfocom.swing.MigLayout;
 
 
 public class InventoryGUI {
 
 	private JFrame frame;
+	private FSController fsControl;
+	private JarPictLoader jar;
 
 	/**
 	 * Launch the application.
@@ -35,36 +46,63 @@ public class InventoryGUI {
 	/**
 	 * Create the application.
 	 */
-	public InventoryGUI() {
+	public InventoryGUI(FSController con, JarPictLoader j) {
+		fsControl = con;
+		jar = j;
 		initialize();
 	}
 
+	public FSController getControl() {
+		return fsControl;
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setAutoRequestFocus(true);
+		frame.setAlwaysOnTop(true);
 		frame.setVisible(true);
+
 		
-		JButton Fish = new JButton("Fish");
-		Fish.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		frame.getContentPane().setLayout(new MigLayout("", "[50px][50px][50px][50px][50px]", "[25px][25px][25px][20px][25px][25px]"));
 		
 		JLabel lblNewLabel = new JLabel("INVENTORY");
 		frame.getContentPane().add(lblNewLabel, "cell 0 0 5 1,alignx center,aligny center");
 		
-		JLabel FishPic = new JLabel("Fish");
+		JLabel FishPic = new JLabel("");
 		frame.getContentPane().add(FishPic, "cell 0 1,alignx center,aligny center");
+		
+		
+		FishPic.setMinimumSize(new Dimension(40, 40));
+		ImageIcon pFish = jar.getFish();
+		
+		Image img1 = pFish.getImage();
+		Image newImg1 = img1.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+		pFish = new ImageIcon(newImg1);
+		
+		FishPic.setIcon(pFish);
+		
+		
+		JButton Fish = new JButton("Fish");
 		frame.getContentPane().add(Fish, "cell 1 1 1 2,grow");
 		
-		JLabel GreenPic = new JLabel("Green");
+		JLabel GreenPic = new JLabel("");
 		frame.getContentPane().add(GreenPic, "cell 3 1,alignx center,aligny center");
+		
+		
+		GreenPic.setMinimumSize(new Dimension(40, 40));
+		ImageIcon pGreen = jar.getGPotion();
+		
+		Image img2 = pGreen.getImage();
+		Image newImg2 = img2.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+		pGreen = new ImageIcon(newImg2);
+		
+		GreenPic.setIcon(pGreen);
+		
 		
 		JButton GreenPotion = new JButton("Green");
 		frame.getContentPane().add(GreenPotion, "cell 4 1 1 2,grow");
@@ -77,17 +115,39 @@ public class InventoryGUI {
 		GreenNum.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(GreenNum, "cell 3 2,alignx center,aligny center");
 		
-		JLabel OrangePic = new JLabel("Orange");
+		JLabel OrangePic = new JLabel("");
 		frame.getContentPane().add(OrangePic, "cell 0 4,alignx center,aligny center");
+		
+		
+		OrangePic.setMinimumSize(new Dimension(40, 40));
+		ImageIcon pOrange = jar.getOPotion();
+		
+		Image img3 = pOrange.getImage();
+		Image newImg3 = img3.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+		pOrange = new ImageIcon(newImg3);
+		
+		OrangePic.setIcon(pOrange);
+		
 		
 		JButton OrangePotion = new JButton("Orange");
 		frame.getContentPane().add(OrangePotion, "cell 1 4 1 2,grow");
 		
-		JLabel PurplePic = new JLabel("Purple");
-		frame.getContentPane().add(PurplePic, "cell 3 4,alignx center,aligny center");
+		JLabel PinkPic = new JLabel("");
+		frame.getContentPane().add(PinkPic, "cell 3 4,alignx center,aligny center");
 		
-		JButton PurplePotion = new JButton("Purple");
-		frame.getContentPane().add(PurplePotion, "cell 4 4 1 2,grow");
+		
+		PinkPic.setMinimumSize(new Dimension(40, 40));
+		ImageIcon pPink = jar.getPPotion();
+		
+		Image img4 = pPink.getImage();
+		Image newImg4 = img4.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+		pPink = new ImageIcon(newImg4);
+		
+		PinkPic.setIcon(pPink);
+		
+		
+		JButton PinkPotion = new JButton("Pink");
+		frame.getContentPane().add(PinkPotion, "cell 4 4 1 2,grow");
 		
 		JLabel OrangeNum = new JLabel("X 4");
 		OrangeNum.setHorizontalAlignment(SwingConstants.CENTER);
@@ -98,4 +158,22 @@ public class InventoryGUI {
 	}
 
 	///TODO show msg dialoge to make sure option chosen is wanted + pass action into FSCOntroller and close inventory window + decrease item num
+	
+	public boolean checkButton(String potion)
+	{
+		boolean use = false;
+		int opt = JOptionPane.showConfirmDialog(frame, "You chose a " + potion + "!", "Are you sure you want to use it?", JOptionPane.OK_CANCEL_OPTION);
+		
+		if (opt == JOptionPane.CANCEL_OPTION)
+		{
+			use = false;
+		}
+		else if (opt == JOptionPane.YES_OPTION)
+		{
+			use = true;
+			frame.dispose();
+		}
+		
+		return use;
+	}
 }
