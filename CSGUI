@@ -26,7 +26,7 @@ public class CSGUI {
 	Cat mottled;
 	Cat black;
 	Cat tabby;
-	JarPictLoader j;
+	JarLoader j;
 	
 	/**
 	 * Launch the application.
@@ -36,7 +36,7 @@ public class CSGUI {
 	/**
 	 * Create the application.
 	 */
-	public CSGUI(JarPictLoader loader) {
+	public CSGUI(JarLoader loader) {
 		j = loader;
 		mottled = new Cat(0,5,5,5,5);
 		black = new Cat(1,5,5,5,5);
@@ -81,52 +81,42 @@ public class CSGUI {
 
 		JLabel lblChooseYourStarter = new JLabel("Choose your starter cat!");
 		lblChooseYourStarter.setForeground(new Color(0, 206, 209));
-		lblChooseYourStarter.setBounds(462, 127, 795, 129);
+		lblChooseYourStarter.setBounds(600, 127, 795, 129);
 		lblChooseYourStarter.setFont(new Font("Matura MT Script Capitals", Font.BOLD, 60));
 		pane.add(lblChooseYourStarter);
 		
 		tabbyBtn = new JButton("Tabby Cat");
 		tabbyBtn.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tabbyBtn.setBounds(123, 345, 200, 50);
+		tabbyBtn.setBounds(175, 345, 200, 50);
 		tabbyBtn.addActionListener(new CSClickListener());
 		pane.add(tabbyBtn);
 
 		
 		blackBtn = new JButton("Black Cat");
 		blackBtn.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		blackBtn.setBounds(687, 345, 200,50);
+		blackBtn.setBounds(775, 345, 200,50);
 		blackBtn.addActionListener(new CSClickListener());
 		pane.add(blackBtn);
 		
 		mottledBtn = new JButton("Mottled Cat");
 		mottledBtn.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		mottledBtn.setBounds(1300, 345, 200, 50);
+		mottledBtn.setBounds(1375, 345, 200, 50);
 		pane.add(mottledBtn);
 		mottledBtn.addActionListener(new CSClickListener());
 		
-		ImageIcon imgIc1 = j.getTabbyCat();
-		Image img1 = imgIc1.getImage();
-		Image newImg1 = img1.getScaledInstance(400, 600, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
-		imgIc1 = new ImageIcon (newImg1);		
-		JLabel tabbyLbl = new JLabel();
-		tabbyLbl.setBounds(27, 267, 400, 600);
-		tabbyLbl.setIcon(imgIc1); 
+		JLabel tabbyLbl = new JLabel("");
+		tabbyLbl.setBounds(50, 267, 500, 600);
+		tabbyLbl.setIcon(tabby.getImgIcon(j, "front")); 
 		pane.add(tabbyLbl);
 		
-		ImageIcon icon = j.getBlackCat();
-		Image i = icon.getImage();
-		Image newI = i.getScaledInstance(400, 600, Image.SCALE_SMOOTH);
-		icon = new ImageIcon (newI);
-		JLabel blackLbl = new JLabel(icon);
-		blackLbl.setBounds(608, 267, 400, 600);
+		JLabel blackLbl = new JLabel("");
+		blackLbl.setBounds(650, 267, 500, 600);
+		blackLbl.setIcon(black.getImgIcon(j, "front"));
 		pane.add(blackLbl);
 		
 		JLabel mottledCatLabel = new JLabel("");
-		mottledCatLabel.setBounds(1226, 267, 400, 600);
-		ImageIcon icon2 = j.getMottledCat();
-		Image newImg2 = icon2.getImage().getScaledInstance(400, 600, Image.SCALE_SMOOTH);
-		icon2.setImage(newImg2);
-		mottledCatLabel.setIcon(icon2);
+		mottledCatLabel.setBounds(1250, 267, 500, 600);
+		mottledCatLabel.setIcon(mottled.getImgIcon(j, "front"));
 		pane.add(mottledCatLabel);
 
 	}
@@ -139,29 +129,29 @@ public class CSGUI {
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == mottledBtn){
 				Cat cat1 = new Cat(0, 20, 20, 20, 20);
-				CatList cl = new CatList();
+				CatList cl = j.getCatList();
 				cl.addCat(cat1);
 				System.out.println("Button 1 clicked");
 				exit();
-				MenuGUI menu = new MenuGUI(cl, j);
+				MenuGUI menu = new MenuGUI(j);
 				
 			}
 			if (event.getSource() == blackBtn){
 				Cat cat1 = new Cat(1, 20, 20, 20, 20);
-				CatList cl = new CatList();
+				CatList cl = j.getCatList();
 				cl.addCat(cat1);
 				System.out.println("Button clicked");
 				exit();
-				MenuGUI menu = new MenuGUI(cl, j);
+				MenuGUI menu = new MenuGUI(j);
 
 			}
 			if (event.getSource() == tabbyBtn){
 				Cat cat1 = new Cat(2, 20, 20, 20, 20);
-				CatList cl = new CatList();
+				CatList cl = j.getCatList();
 				cl.addCat(cat1);
 				System.out.println("Button 2 clicked");
 				exit();
-				MenuGUI menu = new MenuGUI(cl, j);
+				MenuGUI menu = new MenuGUI(j);
 
 			}
 		}
