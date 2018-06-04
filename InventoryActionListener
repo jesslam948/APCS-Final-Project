@@ -14,19 +14,32 @@ public class InventoryActionListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		FSController control = iscreen.getControl();
+		boolean isChosen = false;
 		boolean isCaught = false;
 		
 		if (e.getActionCommand().equals("Pink"))
 		{
-			control.incRP("my", 1);
-		}
-		else if (e.getActionCommand().equals("Orange"))
-		{
-			control.incRP("my", 2);
+			if (iscreen.checkPotion("Pink"))
+			{
+				control.incRP("my", 5);
+				isChosen = true;
+			}
 		}
 		else if (e.getActionCommand().equals("Green"))
 		{
-			control.incRP("my", 3);
+			if (iscreen.checkPotion("Green"))
+			{
+				control.incRP("my", 6);
+				isChosen = true;
+			}
+		}
+		else if (e.getActionCommand().equals("Orange"))
+		{
+			if (iscreen.checkPotion("Orange"))
+			{
+				control.incRP("my", 7);
+				isChosen = true;
+			}
 		}
 		else if (e.getActionCommand().equals("Fish"))
 		{
@@ -36,7 +49,7 @@ public class InventoryActionListener implements ActionListener{
 			}
 		}
 		
-		if (!isCaught)
+		if (!isCaught && isChosen)
 		{
 			control.compAttack();
 		}
