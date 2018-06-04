@@ -15,6 +15,7 @@ public class FSController {
 	private ArrayList<Integer> potions;
 	private JarPictLoader j;
 	private CatList cl;
+	private InventoryController invControl;
 	
 	public FSController(Cat cat, JarPictLoader jar)
 	{
@@ -30,11 +31,19 @@ public class FSController {
 		
 		potions = new ArrayList<Integer>();
 		
-		potions.add(1);
-		potions.add(2);
-		potions.add(3);
+		potions.add(5);
+		potions.add(6);
+		potions.add(7);
 		
 		j = jar;
+		
+		invControl = new InventoryController();
+		
+		//TODO/////CHANGE LATER/////
+		invControl.setFish(2);
+		invControl.setOrange(2);
+		invControl.setGreen(2);
+		invControl.setPink(2);
 	}
 
 	public void setGui (FSGUI gui)
@@ -96,7 +105,7 @@ public class FSController {
 		
 		int move = 0;
 		
-		if (otherRP <= 3)
+		if (otherRP <= 3 && altRandNum <= 7)
 			move = potions.remove((int)(Math.random() * potions.size()));
 		else if (otherRP <= 6 && altRandNum <= 5)
 			move = potions.remove((int)(Math.random() * potions.size()));
@@ -159,12 +168,12 @@ public class FSController {
 		if (myRP == 0)
 		{
 			isEnded = true;
-			myGui.isEnd("lost! Let your cat rest!");
+			myGui.isEnd("You lost! Let your cat rest!");
 		}
 		else if (otherRP == 0)
 		{
 			isEnded = true;
-			myGui.isEnd("lost! The other cat ran away!");
+			myGui.isEnd("Oh no! The other cat ran away!");
 		}
 	}
 	
@@ -180,13 +189,13 @@ public class FSController {
 		
 		switch (potion)
 		{
-		case 1:
+		case 5:
 			pts = 5;
 			break;
-		case 2:
+		case 6:
 			pts = 10;
 			break;
-		case 3:
+		case 7:
 			pts = 15;
 			break;
 		}
@@ -235,7 +244,7 @@ public class FSController {
 	}
 	
 	public void openInv()
-	{
-		InventoryGUI window = new InventoryGUI(this, j);
+	{	
+		InventoryGUI window = new InventoryGUI(this, invControl, j);
 	}
 }
