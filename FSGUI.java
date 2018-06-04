@@ -195,20 +195,30 @@ public class FSGUI {
 			actionName = Move4.getText() + "! - " + pts + "pts!";
 			break;
 		case 5:
-			actionName = "Green" + "! + " + pts + "pts!";
+			actionName = "a Pink Potion! + " + pts + "pts!";
 			break;
 		case 6:
-			actionName = "Orange" + "! + " + pts + "pts!";
+			actionName = "a Green Potion! + " + pts + "pts!";
 			break;
 		case 7:
-			actionName = "Pink" + "! + " + pts + "pts!";
+			actionName = "an Orange Potion! + " + pts + "pts!";
 			break;
 		}
 		
-		if (defender.equals("my"))
-			cat = "The other cat used ";
+		if (action < 5)
+		{
+			if (defender.equals("my"))
+				cat = "The other cat used ";
+			else
+				cat = "You used ";
+		}
 		else
-			cat = "You used ";
+		{
+			if (defender.equals("other"))
+				cat = "The other cat used ";
+			else
+				cat = "You used ";
+		}
 		
 		JOptionPane.showMessageDialog(frame, cat + actionName);
 	}
@@ -243,7 +253,7 @@ public class FSGUI {
 	
 	public void isEnd(String result)
 	{
-		JOptionPane.showMessageDialog(frame, "You " + result + "!");
+		JOptionPane.showMessageDialog(frame, result);
 		
 		isDone = true;
 		
