@@ -1,0 +1,164 @@
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.PaintEvent;
+
+import javax.swing.JLabel;
+
+import net.miginfocom.swing.MigLayout;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+
+import javax.swing.SwingConstants;
+import javax.swing.JScrollBar;
+import javax.swing.ScrollPaneConstants;
+import java.awt.Color;
+import java.awt.Font;
+
+
+public class StoreGUI {
+
+	private JFrame frame;
+	private Coin c;
+	private JarLoader j;
+
+
+
+	/**
+	 * Create the application.
+	 */
+	public StoreGUI(JarLoader loader) {
+		j = loader;
+		c = j.getCoins();
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		
+		frame.setBounds(100, 100, 508, 568);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[grow]"));
+
+		
+		ImageIcon imgIc = new ImageIcon("H:\\New Folder\\cafestore.jpg");
+		Image img = imgIc.getImage();
+		Image newImg = img.getScaledInstance(2000, 2000, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
+		imgIc = new ImageIcon (newImg);
+		
+		JLabel backgnd = new JLabel(imgIc);
+		backgnd.setBounds(0, 0, 3000, 5000);
+		frame.setSize(800, 800);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		backgnd.setLayout( new BorderLayout() );
+		frame.setContentPane( backgnd );
+		
+
+		BackgroundPanel b = new BackgroundPanel(newImg);
+		b.setTransparentAdd(true);
+		frame.getContentPane().add(b);
+		b.setLayout(null);
+		
+		
+		SClickListener click = new SClickListener(this);
+		
+		JButton fishButton = new JButton("Fish");
+		fishButton.setBackground(new Color(224, 255, 255));
+		fishButton.addActionListener(click);
+		fishButton.setBounds(750, 200, 750, 50);
+		
+		JLabel fishLabel = new JLabel("This tasty seafood snack will entice any cat to join your party, once their resistance is lowered!");
+		fishLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		fishLabel.setForeground(new Color(220, 20, 60));
+		fishLabel.setBounds(200, 200, 1500, 200);
+		
+		JButton pinkButton = new JButton("Salmon juice");
+		pinkButton.setBackground(new Color(224, 255, 255));
+		pinkButton.addActionListener(click);
+		pinkButton.setBounds(750, 400, 750, 50);
+		
+		JLabel pinkLabel = new JLabel("Get these good good salmon oils to increase your cat's fighting spirit! Heals 5 RP.");
+		pinkLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		pinkLabel.setForeground(new Color(102, 204, 255));
+		pinkLabel.setBounds(200, 400, 1500, 200);
+		
+		JButton orangeButton = new JButton("Cheese juice");
+		orangeButton.setBackground(new Color(224, 255, 255));
+		orangeButton.addActionListener(click);
+		orangeButton.setBounds(750, 600, 750, 50);
+		
+		JLabel orangeLabel = new JLabel("Modern cats prefer eating cheese to eating mice. Less boney. Heals 10 RP.");
+		orangeLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		orangeLabel.setForeground(new Color(102, 204, 255));
+		orangeLabel.setBounds(200, 600, 1500, 200);
+		
+		JButton greenButton = new JButton("Catnip juice");
+		greenButton.setBackground(new Color(224, 255, 255));
+		greenButton.addActionListener(click);
+		greenButton.setBounds(750, 800, 750, 50);
+		
+		JLabel greenLabel = new JLabel("Catnip juice. What more needs to be said? Heals 15 RP.");
+		greenLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		greenLabel.setForeground(new Color(102, 204, 255));
+		greenLabel.setBounds(200, 800, 1500, 200);
+		
+		
+		/*JScrollPane scroll = new JScrollPane();
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(0, 0, 1850, 1000);
+		b.add(scroll);
+		*/
+		
+		
+		b.add(fishLabel);
+		b.add(pinkLabel);
+		b.add(orangeLabel);
+		b.add(greenLabel);
+		
+		b.setTransparentAdd(false);
+		b.add(fishButton);
+		b.add(pinkButton);
+		b.add(orangeButton);
+		b.add(greenButton);
+		frame.setVisible(true);
+		
+	}
+	public void buyFish(){
+		Fish f = new Fish();
+		c.addCoin(-(f.getPrice()));
+	}
+	public void buyPink(){
+		PinkPotion p = new PinkPotion();
+		c.addCoin(-(p.getPrice()));
+	}
+	public void buyOrange(){
+		OrangePotion o = new OrangePotion();
+		c.addCoin(-(o.getPrice()));
+	}
+	public void buyGreen(){
+		GreenPotion g = new GreenPotion();
+		c.addCoin(-(g.getPrice()));
+	}
+	
+	public void delete(){
+		frame.dispose();
+	}
+}
