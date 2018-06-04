@@ -1,3 +1,5 @@
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
 public class Cat {
 	private int breed;
@@ -47,35 +49,79 @@ public class Cat {
 		return null;
 	}
 	
-	public ImageIcon getImgIcon(JarLoader j){
-		if(breed == 0){
-			return j.getMottledCat();
+	public ImageIcon getImgIcon(JarLoader j, String s){
+		ImageIcon mcat;
+		if(s.equals("front")){
+			if(breed == 0){
+				mcat = j.getMottledCat();
+			}
+			else if(breed == 1){
+				mcat = j.getBlackCat();
+			}
+			else if(breed== 2){
+				mcat = j.getTabbyCat();
+			}
+			else if(breed== 3){
+				mcat = j.getWhiteCat();
+			}
+			else if(breed== 4){
+				mcat = j.getSiameseCat();
+			}
+			else if(breed == 5){
+				mcat = j.getTuxedoCat();
+			}
+			else if(breed == 6){
+				mcat = j.getCalicoCat();
+			}
+			else if(breed==7){
+				mcat = j.getTurkishAngoraCat();
+			}
+			else if(breed == 8){
+				mcat = j.getRussianBlueCat();
+			}
+			else{
+				return null;
+			}
 		}
-		if(breed == 1){
-			return j.getBlackCat();
+		else if(s.equals("back")){ // HELLO YOU WILL NEED TO CHANGE THESE TO THE BACK IMAGE
+			if(breed == 0){
+				mcat = j.getbMottledCat();
+			}
+			else if(breed == 1){
+				mcat = j.getBlackCat();
+			}
+			else if(breed== 2){
+				mcat = j.getTabbyCat();
+			}
+			else if(breed== 3){
+				mcat = j.getWhiteCat();
+			}
+			else if(breed== 4){
+				mcat = j.getSiameseCat();
+			}
+			else if(breed == 5){
+				mcat = j.getTuxedoCat();
+			}
+			else if(breed == 6){
+				mcat = j.getCalicoCat();
+			}
+			else if(breed==7){
+				mcat = j.getTurkishAngoraCat();
+			}
+			else if(breed == 8){
+				mcat = j.getRussianBlueCat();
+			}
+			else{
+				return null;
+			}
 		}
-		if(breed== 2){
-			return j.getTabbyCat();
+		else{
+			return null;
 		}
-		if(breed== 3){
-			return j.getWhiteCat();
-		}
-		if(breed== 4){
-			
-		}
-		if(breed == 5){
-			
-		}
-		if(breed == 6){
-			
-		}
-		if(breed==7){
-			
-		}
-		if(breed == 8){
-			
-		}
-		return null;
+		Image mcat1 = mcat.getImage();
+		Image mcat2 = mcat1.getScaledInstance(500, 600, Image.SCALE_SMOOTH);
+		mcat = new ImageIcon (mcat2);
+		return mcat;
 	}
 
 	public int getCuteness(){
