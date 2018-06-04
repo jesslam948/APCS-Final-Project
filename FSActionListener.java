@@ -38,7 +38,7 @@ public class FSActionListener implements ActionListener{
 			invClicked = true;
 			control.openInv();
 		}
-
+		
 		if (!fscreen.hasEnded() && !invClicked)
 		{
 			control.compAttack();
