@@ -286,7 +286,7 @@ public class CLGUI {
 	}
 	public void fight(){
 		if(focusCat.getBreed() != -1){
-			FSController c = new FSController(focusCat);
+			FSController c = new FSController(focusCat, j);
 			FSGUI gui = new FSGUI(c, j);
 			c.setGui(gui);
 			frame.dispose();
@@ -294,7 +294,7 @@ public class CLGUI {
 	}
 	public void stats(){
 		if(focusCat.getBreed() != -1){
-			StatsGUI sgui = new StatsGUI(focusCat, j);
+			StatsGUI sgui = new StatsGUI(focusCat, j, catList);
 			frame.dispose();
 		}
 	}
