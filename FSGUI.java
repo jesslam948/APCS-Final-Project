@@ -26,8 +26,7 @@ import javax.swing.JProgressBar;
 
 public class FSGUI {
 
-	private JarPictLoader j;
-	private CatList catlist;
+	private JarLoader j;
 	private JFrame frame;
 	private FSController myControl;
 	private JProgressBar OCatRP;
@@ -45,10 +44,9 @@ public class FSGUI {
 	/**
 	 * Create the application.
 	 */
-	public FSGUI(FSController control, JarPictLoader loader, CatList cl) {
+	public FSGUI(FSController control, JarLoader loader) {
 		myControl = control;
 		j = loader;
-		catlist = cl;
 		initialize();
 		
 	}
@@ -56,11 +54,6 @@ public class FSGUI {
 	public FSController getControl()
 	{
 		return myControl;
-	}
-	
-	public CatList getList()
-	{
-		return catlist;
 	}
 	
 	/**
@@ -260,7 +253,7 @@ public class FSGUI {
 		frame.setVisible(false);
 		frame.dispose();
 		
-		MenuGUI menu = new MenuGUI(catlist, j);
+		MenuGUI menu = new MenuGUI(j);
 	}
 	
 	public boolean hasEnded()
