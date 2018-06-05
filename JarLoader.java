@@ -8,12 +8,11 @@ public class JarLoader {
 	private ImageIcon backMottledCat, blackCat, fightScreenBG, whiteCat, tabbyCat, siameseCat, mottledCat, CSBG, statsBG, qMark, oPotion, pPotion, gPotion, fish, menuBG, storeBG, CLBG;
 	private ImageIcon turkishCat, tuxedoCat, calicoCat, russianCat;
 	private CatList cats;
-	private Coin coins;
 	
 	public JarLoader() {
 		ClassLoader cldr = this.getClass().getClassLoader();
 		cats = new CatList();
-		coins = new Coin();
+		
 		try{
 			
 			backMottledCat = new ImageIcon(cldr.getResource("backmottledcat.png"));
@@ -96,13 +95,6 @@ public class JarLoader {
 	public ImageIcon getStatsBG(){
 		return statsBG;
 	}
-	public CatList getCatList(){
-		return cats;
-	}
-	public Coin getCoins(){
-		return coins;
-	}
-	
 	public ImageIcon getOPotion(){
 		return oPotion;
 	}
@@ -128,6 +120,8 @@ public class JarLoader {
 		return CLBG;
 	}
 	
-	
+	public CatList getCatList(){
+		return cats;
+	}
 		
 }
