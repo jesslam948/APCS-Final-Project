@@ -13,8 +13,7 @@ import net.miginfocom.swing.MigLayout;
 public class MenuGUI{
 
 	private JFrame frame;
-	private CatList catList;
-	private JarPictLoader j;
+	private JarLoader j;
 	/**
 	 * Launch the application.
 	 */
@@ -25,8 +24,7 @@ public class MenuGUI{
 	 */
 	
 	
-	public MenuGUI(CatList cl, JarPictLoader loader) {
-		catList = cl;
+	public MenuGUI(JarLoader loader) {
 		j = loader;
 		initialize();
 		frame.setVisible(true);
@@ -45,17 +43,7 @@ public class MenuGUI{
 		JLayeredPane pane = new JLayeredPane();
 		pane.setBorder(null);
 		frame.getContentPane().add(pane, "cell 0 0 2 1,grow");
-/*		JLayeredPane layeredPane = new JLayeredPane();
-		frame.getContentPane().add(layeredPane, "cell 0 0,grow");
-		layeredPane.setLayout(new MigLayout("", "[grow]", "[grow][grow]"));
-		
-		JPanel panel_1 = new JPanel();
-		layeredPane.setLayer(panel_1, 1);
-		layeredPane.add(panel_1, "cell 0 0,grow");
-		
-		JPanel panel = new JPanel();
-		layeredPane.add(panel, "cell 0 1,grow");
-		*/
+
 		
 		ImageIcon imgIc = j.getfightScreenBG();
 		Image img = imgIc.getImage();
@@ -67,28 +55,26 @@ public class MenuGUI{
 		frame.getContentPane().add(backgnd);
 		backgnd.setLayout(null);
 		
-		/*JLabel backgnd = new JLabel(imgIc);
-		frame.getContentPane().add(backgnd, "");
-		frame.setSize(800, 800);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		*/
 		
 		MenuClickListener l = new MenuClickListener(this);
 		
-		JButton fightButton = new JButton("Cats");
-		fightButton.setBounds(900, 400, 200, 100);
-		backgnd.add(fightButton);
-		fightButton.addActionListener(l);
+		JButton catsButton = new JButton("Cats");
+		catsButton.setBounds(900, 400, 200, 100);
+		backgnd.add(catsButton);
+		catsButton.addActionListener(l);
 		
-		JButton catButton = new JButton("Store");
-		catButton.setBounds(900, 500, 200, 100);
-		backgnd.add(catButton);
-		catButton.addActionListener(l);
+		JButton storeButton = new JButton("Store");
+		storeButton.setBounds(900, 500, 200, 100);
+		backgnd.add(storeButton);
+		storeButton.addActionListener(l);
 		
 		
 	}
 	public void cats(){
-		CLGUI c = new CLGUI(catList, j);
+		CLGUI c = new CLGUI(j);
+	}
+	public void store(){
+		StoreGUI s = new StoreGUI(j);
 	}
 	
 	public void delete(){
