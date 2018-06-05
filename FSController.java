@@ -13,11 +13,11 @@ public class FSController {
 	private int counter;
 	private boolean isEnded;
 	private ArrayList<Integer> potions;
-	private JarPictLoader j;
+	private JarLoader j;
 	private CatList cl;
 	private InventoryController invControl;
 	
-	public FSController(Cat cat, JarPictLoader jar)
+	public FSController(Cat cat, JarLoader jar)
 	{
 		myCat = cat;
 		myRP = myCat.getRP();
@@ -38,19 +38,13 @@ public class FSController {
 		j = jar;
 		
 		invControl = new InventoryController();
-		
-		//TODO/////CHANGE LATER/////
-		invControl.setFish(2);
-		invControl.setOrange(2);
-		invControl.setGreen(2);
-		invControl.setPink(2);
 	}
 
 	public void setGui (FSGUI gui)
 	{
 		myGui = gui;
 		setRP();
-		cl = myGui.getList();
+		cl = j.getCatList();
 	}
 	
 	public Cat setOtherCat()
@@ -77,9 +71,9 @@ public class FSController {
 	public ImageIcon setCat(String cat)
 	{
 		if (cat.equals("my"))
-			return myCat.getImgIcon(j);
+			return myCat.getImgIcon(j, "back");
 		else
-			return otherCat.getImgIcon(j);
+			return otherCat.getImgIcon(j, "front");
 	}
 	
 	public int getMRP()
