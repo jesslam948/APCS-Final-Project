@@ -3,7 +3,7 @@ import java.awt.EventQueue;
 
 public class Tester {
 	public static void main(String[] args) {
-		JarPictLoader j = new JarPictLoader();
+		JarLoader j = new JarLoader();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
