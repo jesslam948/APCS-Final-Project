@@ -25,7 +25,7 @@ public class InventoryGUI {
 
 	private JFrame frame;
 	private FSController fsControl;
-	private JarPictLoader jar;
+	private JarLoader jar;
 	private InventoryController invControl;
 	private JLabel FishLabel;
 	private JLabel OrangeLabel;
@@ -35,7 +35,7 @@ public class InventoryGUI {
 	/**
 	 * Create the application.
 	 */
-	public InventoryGUI(FSController fscon, InventoryController invcon, JarPictLoader j) {
+	public InventoryGUI(FSController fscon, InventoryController invcon, JarLoader j) {
 		fsControl = fscon;
 		invControl = invcon;
 		jar = j;
