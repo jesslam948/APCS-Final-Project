@@ -4,16 +4,11 @@ import java.util.ArrayList;
 
 public class CatList{
 	private ArrayList<Cat> catList;
-	private ArrayList<Cat> opposeCats;
 	
 	public CatList(){
 		catList = new ArrayList<Cat>();
 		for(int i = 0; i <10; i++){
 			catList.add(i, new Cat(-1, 0, 0, 0, 0));
-		}
-		opposeCats = new ArrayList<Cat>();
-		for(int i = 0; i <10; i++){
-			opposeCats.add(i, new Cat(i, 0, 0, 0, 0));
 		}
 	}
 	
@@ -23,9 +18,5 @@ public class CatList{
 	
 	public Cat getCat(int i){
 		return catList.get(i);
-	}
-	
-	public Cat getOpposeCat(int i){
-		return opposeCats.get(i);
 	}
 }
