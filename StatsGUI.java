@@ -25,7 +25,7 @@ public class StatsGUI {
 	private JFrame frame;
 	private JButton btnFight;
 	private Cat cat;
-	private JarPictLoader j;
+	private JarLoader j;
 	private CatList cl;
 	/**
 	 * Launch the application.
@@ -46,7 +46,7 @@ public class StatsGUI {
 	/**
 	 * Create the application.
 	 */
-	public StatsGUI(Cat c, JarPictLoader loader, CatList catlist) {
+	public StatsGUI(Cat c, JarLoader loader, CatList catlist) {
 		j = loader;
 		cat = c;
 		cl = catlist;
@@ -100,7 +100,7 @@ public class StatsGUI {
 		catLbl.setLineWrap(true);
 		catLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		pane.add(catLbl);
-		ImageIcon imgIc1 = cat.getImgIcon(j);
+		ImageIcon imgIc1 = cat.getImgIcon(j, "front");
 		
 		Image img1 = imgIc1.getImage();
 		Image newImg1 = img1.getScaledInstance(600, 900, Image.SCALE_SMOOTH);//lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_SMOOTH);
@@ -129,8 +129,9 @@ public class StatsGUI {
 			if (event.getSource() == btnFight){
 				System.out.print("go to fight GUI");
 				frame.dispose();
-				FSController con = new FSController(cat);
-				FSGUI gui = new FSGUI(con, j, cl);
+				FSController con = new FSController(cat, j);
+				FSGUI gui = new FSGUI(con, j);
+				con.setGui(gui);
 			}
 		}
 		
