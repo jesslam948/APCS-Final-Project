@@ -1,9 +1,0 @@
-
-import javax.swing.ImageIcon;
-
-public interface Item {
-	
-	public int getPrice();
-	public ImageIcon getImgIcon();
-	public int getIndex();
-}
