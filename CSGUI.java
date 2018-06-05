@@ -56,6 +56,15 @@ public class CSGUI {
 		frame.getContentPane().setLayout(new MigLayout("", "[grow][grow]", "[900px:n:900px][50px:n,grow][50px:n,grow]"));
 		frame.setVisible(true);
 		
+		///These are the instantiated inventory values///
+		
+		InventoryController invControl = new InventoryController();
+		invControl.setCoin(50);
+		invControl.setFish(2);
+		invControl.setPink(2);
+		invControl.setGreen(2);
+		invControl.setOrange(2);
+		
 		
 		ImageIcon imgIc = j.getCSBG();
 		
