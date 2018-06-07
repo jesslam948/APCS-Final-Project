@@ -14,21 +14,26 @@ public class SClickListener implements ActionListener{
 	public void actionPerformed(ActionEvent e)
 	{
 		
-		//TODO
-//		if (e.getActionCommand().equals("Fish")){
-//			fscreen.buyFish();
-//		}
-//		else if (e.getActionCommand().equals("Salmon juice")){
-//			fscreen.buyPink();
-//		}
-//		else if (e.getActionCommand().equals("Cheese juice")){
-//			fscreen.buyOrange();
-//		}
-//		else if (e.getActionCommand().equals("Catnip juice")){
-//			fscreen.buyGreen();
-//		}
-//		fscreen.delete();
-//		
+		
+		if (e.getActionCommand().equals("Fish")){
+			fscreen.initFish();
+		}
+		else if (e.getActionCommand().equals("Salmon juice")){
+			fscreen.initPink();
+		}
+		else if (e.getActionCommand().equals("Cheese juice")){
+			fscreen.initOrange();
+		}
+		else if (e.getActionCommand().equals("Catnip juice")){
+			fscreen.initGreen();
+		}
+		else if(e.getActionCommand().equals("Check out")){
+			fscreen.buy();
+		}
+		else if(e.getActionCommand().equals("Back")){
+			fscreen.back();
+		}
+		
 	}
 
 }
